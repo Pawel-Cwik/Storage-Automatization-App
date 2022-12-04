@@ -1,13 +1,16 @@
-.App {
+.Login {
   text-align: center;
   display: flex;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
   color: white;
-  background-image: linear-gradient(79deg, #ababa0, #bfcbed 48%, #2519d4);
+  background-color: #597cbe;
   padding: 5rem;
+  display: flex;
+  flex-direction: column;
 }
+
 .auth-form-container {
   padding: 5rem;
   border: 1px solid white;
@@ -38,9 +41,10 @@ input {
   margin-bottom: 10px;
 }
 
-button {
-  border: none;
-  background-color: white;
+button-login-register {
+  background-color: #510674;
+  border-color: #510674;
+
   padding: 20px;
   border-radius: 10px;
   cursor: pointer;
@@ -51,4 +55,16 @@ button {
   background: none;
   color: white;
   text-decoration: underline;
+}
+
+.Logo {
+  background-size: cover;
+  height: 100px;
+  width: 275px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
