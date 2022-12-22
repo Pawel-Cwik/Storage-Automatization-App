@@ -1,0 +1,30 @@
+/* create a new class called "TopBar" */
+.TopBar {
+  /* set the background color to #f5f5f5 */
+  background-color: #597cbe;
+  /* set the height to 50px */
+  height: 65px;
+  /* set the width to 100% */
+  width: 100%;
+  /* set the display to flex */
+  display: flex;
+  /* set the flex-direction to row */
+  flex-direction: row;
+  /* set the justify-content to space-between */
+  justify-content: space-between;
+  /* set the align-items to center */
+  align-items: center;
+  /* set the padding to 0 20px */
+  padding: 0 20px;
+}
+.TopBar button {
+  display: inline;
+  font: inherit;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border: 1px solid #40005d;
+  background-color: #40005d;
+  color: white;
+  border-radius: 12px;
+  margin-right: 1rem;
+}

@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import LoginRegister from "./components/LoginRegister";
 import AddToList from "./components/AddToList";
 import BarCode from "./components/BarCode";
-import Search from "./components/Search";
+import Search from "./components/Search/Search";
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
 
