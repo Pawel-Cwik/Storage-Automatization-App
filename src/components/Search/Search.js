@@ -3,7 +3,7 @@ import React from "react";
 import ActivateSearch from "./ActivateSearch";
 import "./Search.css";
 import MoviesList from "./MoviesList";
-
+import ItemPropertiesBar from "../ItemsPropertiesBar";
 function Search(props) {
   const [content, setContent] = React.useState([]);
 
@@ -14,12 +14,15 @@ function Search(props) {
   console.log(content);
 
   const isContent = content.length > 0;
-
   return (
     <div>
       <TopBar></TopBar>
-      <ActivateSearch handleContent={handleContent}></ActivateSearch>
-      {isContent && <MoviesList movies={content}></MoviesList>}
+      <div>
+        <ActivateSearch handleContent={handleContent}></ActivateSearch>
+        {isContent && <ItemPropertiesBar></ItemPropertiesBar>}
+        {isContent && <MoviesList movies={content}></MoviesList>}
+        {}
+      </div>
     </div>
   );
 }

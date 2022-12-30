@@ -10,15 +10,16 @@ const SearchForm = (props) => {
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
+    console.log(enteredTitle);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
     const expenseData = {
-      title: enteredTitle,
-      producer: enteredProducer,
-      amount: +enteredAmount,
-      location: eneteredLoc,
+      nazwa: enteredTitle,
+      producent: enteredProducer,
+      ilosc: +enteredAmount,
+      lokalizacja: eneteredLoc,
     };
     props.onSaveExpenseData(expenseData);
     setEnteredTitle("");
@@ -47,12 +48,13 @@ const SearchForm = (props) => {
       const data = await Response.json();
       console.log(data);
 
-      const transformedMovies = data.results.map((movieData) => {
+      const transformedMovies = data.map((movieData) => {
         return {
-          id: movieData.episode_id,
-          title: movieData.title,
-          openingText: movieData.opening_crawl,
-          releaseDate: movieData.release_date,
+          id_przedmiotu: movieData.id_przedmiotu,
+          nazwa: movieData.nazwa,
+          producent: movieData.producent,
+          ilosc: movieData.ilosc,
+          lokalizacja: movieData.id_poziomu_id,
         };
       });
       setMovies(transformedMovies);

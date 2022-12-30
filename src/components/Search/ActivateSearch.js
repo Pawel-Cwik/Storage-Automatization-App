@@ -1,6 +1,7 @@
 import React from "react";
 import SearchForm from "./SearchForm";
 import "./ActivateSearch.css";
+
 export default function ActivateSearch(props) {
   const [isEditing, setIsEditing] = React.useState(false);
   const startEditingHandler = () => {

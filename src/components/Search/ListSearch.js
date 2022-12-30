@@ -5,9 +5,10 @@ const ListSearch = (props) => {
     <ul className={["movies-list"]}>
       {props.movies.map((movie) => (
         <ShowAllDisplay
-          title={movie.title}
-          releaseDate={movie.releaseDate}
-          openingText={movie.openingText}
+          title={movie.nazwa}
+          releaseDate={movie.ilosc}
+          openingText={movie.producent}
+          lokalizacja={movie.lokalizacja}
         />
       ))}
     </ul>

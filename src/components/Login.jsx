@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import GestampLogo from "../images/Gestamp-Logo.png";
-import GestampLogo2 from "../images/Gestamp-Logo2.png";
+
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
@@ -13,6 +13,11 @@ const Login = (props) => {
   const navigateHome = () => {
     // 👇️ navigate to /
     navigate("/");
+  };
+  const checkLogin = () => {
+    if (email === "admin" && pass === "admin") {
+      navigateHome();
+    }
   };
 
   return (
@@ -40,7 +45,7 @@ const Login = (props) => {
             name="password"
           ></input>
           {/* <button type="submit">Log In</button> */}
-          <button-login-register onClick={navigateHome}>
+          <button-login-register onClick={checkLogin}>
             Log in
           </button-login-register>
         </form>

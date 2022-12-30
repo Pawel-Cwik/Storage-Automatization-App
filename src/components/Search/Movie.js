@@ -3,7 +3,7 @@ import Card from "../UI/Card";
 import "./Movie.module.css";
 
 const myStyle = {
-  borderRadius: "12px",
+  borderRadius: "40px",
   boxShadow: "0 1px 8px rgba(0, 0, 0, 0.25)",
   marginTop: "10px",
   display: "flex",
@@ -12,21 +12,33 @@ const myStyle = {
   padding: "0.5rem",
   margin: "1rem 0",
   backgroundColor: "#4b4b4b",
-  flexDirection: "column",
 };
-
+const expenseStyle = {
+  display: "flex",
+  flexdirection: "column",
+  gap: "1rem",
+  alignitems: "flexend",
+  flexflow: "columnreverse",
+  justifycontent: "flexstart",
+  flex: "1",
+  justifyContent: "space-between",
+};
 const Movie = (props) => {
   return (
     <li>
       <div style={myStyle}>
-        <div className="expense-item__description">
-          <h2>{props.title}</h2>
+        <div style={expenseStyle}>
+          <h2> {props.title}</h2>
         </div>
-        <div className="expense-item__description">
+        <div style={expenseStyle}>
+          <h2>{props.Producer}</h2>
+        </div>
+        <div style={expenseStyle}>
+          <h2>{props.lokalizacja}</h2>
+        </div>
+        <div>
           <h3>{props.releaseDate}</h3>
         </div>
-
-        <p>{props.openingText}</p>
       </div>
     </li>
   );

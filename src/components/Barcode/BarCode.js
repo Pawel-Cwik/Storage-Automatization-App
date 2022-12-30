@@ -1,11 +1,12 @@
 import "./BarCode.css";
 
 import React from "react";
+import TopBar from "../Search/TopBar";
 
 const BarCode = () => {
   return (
     <div>
-      <h2>BarCode</h2>
+      <TopBar></TopBar>
     </div>
   );
 };
