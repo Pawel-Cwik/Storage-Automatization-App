@@ -11,7 +11,7 @@ function Search(props) {
     setContent(data);
   };
 
-  console.log(content);
+  //console.log(content);
 
   const isContent = content.length > 0;
   return (
@@ -21,7 +21,6 @@ function Search(props) {
         <ActivateSearch handleContent={handleContent}></ActivateSearch>
         {isContent && <ItemPropertiesBar></ItemPropertiesBar>}
         {isContent && <MoviesList movies={content}></MoviesList>}
-        {}
       </div>
     </div>
   );

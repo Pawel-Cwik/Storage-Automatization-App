@@ -11,6 +11,7 @@ const SearchForm = (props) => {
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
     console.log(enteredTitle);
+    // console.log(enteredTitle.replaceAll(" ", "_"));
   };
 
   const submitHandler = (event) => {
@@ -50,11 +51,11 @@ const SearchForm = (props) => {
 
       const transformedMovies = data.map((movieData) => {
         return {
-          id_przedmiotu: movieData.id_przedmiotu,
-          nazwa: movieData.nazwa,
-          producent: movieData.producent,
-          ilosc: movieData.ilosc,
-          lokalizacja: movieData.id_poziomu_id,
+          id_przedmiotu: movieData[0].id_przedmiotu,
+          nazwa: movieData[0].nazwa,
+          producent: movieData[0].producent,
+          ilosc: movieData[0].ilosc,
+          lokalizacja: movieData[1].Nazwa_przestrzeni_skladowania,
         };
       });
       setMovies(transformedMovies);
