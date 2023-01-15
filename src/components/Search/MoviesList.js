@@ -2,10 +2,10 @@ import React from "react";
 import Card from "../UI/Card";
 import Movie from "./Movie";
 import classes from "./MoviesList.module.css";
-
+import ItemPropertiesBar from "../ItemsPropertiesBar";
 const ItemList = {
-  padding: "1rem",
-  margin: "2rem auto",
+  padding: "0.1rem",
+  margin: "0.01rem auto",
   width: "50rem",
   maxwidth: "95%",
   borderradius: "12px",
@@ -16,7 +16,8 @@ const ItemList = {
 const MovieList = (props) => {
   return (
     <div style={ItemList}>
-      <ul style={{ overflow: "scroll" }} className={classes["movies-list"]}>
+      <ul className={classes["movies-list"]}>
+        <ItemPropertiesBar></ItemPropertiesBar>
         {props.movies.map((movie) => (
           <Movie
             key={movie.id_przedmiotu}

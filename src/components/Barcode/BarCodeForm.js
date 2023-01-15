@@ -39,24 +39,29 @@ const BarCodeForm = (props) => {
       }
       console.log("TEST2 WIADOMOSC DOTARLA");
       const data = await Response.json();
+      console.log("DATA");
       console.log(data);
+
       const transformedItems = data.map((itemData) => {
         return {
           id_przedmiotu: itemData.id_przedmiotu,
           nazwa: itemData.nazwa,
           producent: itemData.producent,
           ilosc: itemData.ilosc,
-          lokalizacja: itemData[1].Nazwa_przestrzeni_skladowania,
+          lokalizacja: data[1].Nazwa_przestrzeni_skladowania,
         };
       });
 
       setItems(transformedItems[0]);
+      props.handleContent([transformedItems[0]]);
+      console.log("TRANSFORMED ITEMS");
+      console.log(transformedItems);
+      console.log("Check");
       console.log(transformedItems[0]);
       setIsLoading(false);
     } catch (error) {
       setError(error.message);
     }
-    console.log(items);
   }
 
   let content = <p>Found no items.</p>;

@@ -4,13 +4,13 @@ import "./Movie.module.css";
 
 const myStyle = {
   borderRadius: "40px",
-  boxShadow: "0 1px 8px rgba(0, 0, 0, 0.25)",
+  boxShadow: "0 1px 8px rgba(0, 0, 0, 0.9)",
   marginTop: "10px",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   padding: "0.5rem",
-  margin: "1rem 0",
+  margin: "0.5rem auto",
   backgroundColor: "#4b4b4b",
 };
 const expenseStyle = {
@@ -21,8 +21,17 @@ const expenseStyle = {
   flexflow: "columnreverse",
   justifycontent: "flexstart",
   flex: "1",
-  justifyContent: "space-between",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "0.5rem",
 };
+const buttonStyle = {
+  padding: "0.5rem",
+  margin: "1rem 0.5rem",
+  backgroundColor: "white",
+  color: "black",
+};
+
 const Movie = (props) => {
   return (
     <li>
@@ -39,6 +48,7 @@ const Movie = (props) => {
         <div>
           <h3>{props.releaseDate}</h3>
         </div>
+        <button style={buttonStyle}>Edit</button>
       </div>
     </li>
   );

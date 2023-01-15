@@ -1,7 +1,7 @@
 const ItemPropertiesBarStyle = {
   backgroundColor: "#597cbe",
-  padding: "1rem",
-  margin: "2rem auto",
+  padding: "auto",
+  margin: "0.5rem auto",
   width: "50rem",
   maxWidth: "95%",
   borderRadius: "12px",

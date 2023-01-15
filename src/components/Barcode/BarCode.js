@@ -10,8 +10,6 @@ function BarCode(props) {
   const handleContent = (data) => {
     setContent(data);
   };
-  console.log(content);
-  console.log("kakakaka");
   const isContent = content.length > 0;
 
   return (
