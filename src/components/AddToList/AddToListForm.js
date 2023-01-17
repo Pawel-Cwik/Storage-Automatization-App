@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import "./SearchForm.css";
-import MoviesList from "./MoviesList";
+import { useState } from "react";
+import "../Search/ActivateSearch.css";
+import MoviesList from "../Search/MoviesList";
 import React from "react";
-const SearchForm = (props) => {
+import AddingAlert from "../SAlerts/AddingAlert";
+const AddToListForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredProducer, setEnteredProducer] = useState("NULL");
   const [enteredAmount, setEnteredAmount] = useState("");
@@ -14,7 +15,9 @@ const SearchForm = (props) => {
     //console.log(enteredTitle);
     // console.log(enteredTitle.replaceAll(" ", "_"));
   };
-
+  const amountChangeHandler = (event) => {
+    setEnteredAmount(event.target.value);
+  };
   const submitHandler = (event) => {
     event.preventDefault();
     const expenseData = {
@@ -33,99 +36,17 @@ const SearchForm = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  async function fetchByNameProducerLocationHandler() {
+  async function addToListHandler() {
     setIsLoading(true);
     setError(null);
 
-    if (enteredTitle.length === 0) {
-      try {
-        const fillSpaces = enteredProducer.replaceAll(" ", "_");
-        const Response = await fetch(
-          `http://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/search_for/NULL/${eneteredLoc}/${fillSpaces}/`
-        );
-
-        if (!Response.ok) {
-          console.log("TEST2 WIADOMOSC NIE DOTARLA");
-
-          throw new Error("Something went wrong!");
-        }
-        console.log("TEST2 WIADOMOSC DOTARLA");
-        const data = await Response.json();
-        console.log(data);
-
-        const transformedMovies = data.map((movieData) => {
-          return {
-            id_przedmiotu: movieData[0].id_przedmiotu,
-            nazwa: movieData[0].nazwa,
-            producent: movieData[0].producent,
-            ilosc: movieData[0].ilosc,
-            lokalizacja: movieData[1].Nazwa_przestrzeni_skladowania,
-          };
-        });
-        setMovies(transformedMovies);
-        setIsLoading(false);
-        props.handleContent(transformedMovies);
-      } catch (error) {
-        setError(error.message);
-      }
-      setIsLoading(false);
-
-      // jeżeli tak, to fetch na null/${producer}/${location}
-      // Jeżeli ni to fetch na ${title}/${producer}/${location}
-    }
-
-    if (enteredTitle.length > 0) {
-      try {
-        const fillSpacesProducer = enteredProducer.replaceAll(" ", "_");
-        const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
-
-        const Response = await fetch(
-          `http://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/search_for/${fillSpacesTitle}/${eneteredLoc}/${fillSpacesProducer}/`
-        );
-
-        if (!Response.ok) {
-          console.log("TEST2 WIADOMOSC NIE DOTARLA");
-
-          throw new Error("Something went wrong!");
-        }
-        console.log("TEST2 WIADOMOSC DOTARLA");
-        const data = await Response.json();
-        console.log(data);
-
-        const transformedMovies = data.map((movieData) => {
-          return {
-            id_przedmiotu: movieData[0].id_przedmiotu,
-            nazwa: movieData[0].nazwa,
-            producent: movieData[0].producent,
-            ilosc: movieData[0].ilosc,
-            lokalizacja: movieData[1].Nazwa_przestrzeni_skladowania,
-          };
-        });
-        setMovies(transformedMovies);
-        setIsLoading(false);
-        props.handleContent(transformedMovies);
-      } catch (error) {
-        setError(error.message);
-      }
-      setIsLoading(false);
-
-      // jeżeli tak, to fetch na null/${producer}/${location}
-      // Jeżeli ni to fetch na ${title}/${producer}/${location}
-    }
-
-    console.log("Test1");
-    console.log(enteredTitle);
-    console.log(enteredTitle.length);
-    console.log(enteredProducer);
-    console.log(eneteredLoc);
-  }
-  async function fetchMoviesHandler() {
-    setIsLoading(true);
-    setError(null);
-    console.log("Test1");
     try {
+      const fillSpacesProducer = enteredProducer.replaceAll(" ", "_");
+      const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
+      const fillAmount = enteredAmount.replaceAll(" ", "_");
+
       const Response = await fetch(
-        "http://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/download_all_items/"
+        `http://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/test2/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}`
       );
 
       if (!Response.ok) {
@@ -139,20 +60,31 @@ const SearchForm = (props) => {
 
       const transformedMovies = data.map((movieData) => {
         return {
-          id_przedmiotu: movieData[0].id_przedmiotu,
-          nazwa: movieData[0].nazwa,
-          producent: movieData[0].producent,
-          ilosc: movieData[0].ilosc,
-          lokalizacja: movieData[1].Nazwa_przestrzeni_skladowania,
+          id_przedmiotu: data[1][0].id_przedmiotu,
+          nazwa: data[1][0].nazwa,
+          producent: data[1][0].producent,
+          ilosc: data[1][0].ilosc,
+          lokalizacja: data[1][1].Nazwa_przestrzeni_skladowania,
         };
       });
-      setMovies(transformedMovies);
+      console.log(data[1][0]);
+      console.log(data[0]);
+      if (data[0] === "DB") {
+        AddingAlert();
+      }
+      setMovies(transformedMovies[0]);
       setIsLoading(false);
-      props.handleContent(transformedMovies);
+      props.handleContent([transformedMovies[1]]);
     } catch (error) {
       setError(error.message);
     }
     setIsLoading(false);
+
+    console.log("Test1");
+    console.log(enteredTitle);
+    console.log(enteredProducer);
+    console.log(eneteredLoc);
+    console.log(enteredAmount);
   }
 
   let content = <p>Found no movies.</p>;
@@ -171,7 +103,7 @@ const SearchForm = (props) => {
       <form onSubmit={submitHandler}>
         <div className="'search-form__controls">
           <div className="search-form__control">
-            <label>Search</label>
+            <label>Name</label>
             <input
               type="text"
               value={enteredTitle}
@@ -316,22 +248,29 @@ const SearchForm = (props) => {
               <option value="RE-03-K02">RE-03-K02</option>
             </select>
           </div>
+          <div className="search-form__control">
+            <label>Amount</label>
+            <input
+              type="text"
+              value={enteredAmount}
+              onChange={amountChangeHandler}
+            ></input>
+          </div>
         </div>
 
         <div className="search-form__actions">
-          <button type="button" onClick={fetchMoviesHandler}>
-            Show all
+          <button type="button" onClick={addToListHandler}>
+            Add
           </button>
           <button type="button" onClick={props.onCancel}>
             Cancel
           </button>
-          <button type="button" onClick={fetchByNameProducerLocationHandler}>
-            Search
-          </button>
+          {/* <button type="button" onClick={fetchByNameProducerLocationHandler}>
+            Accept
+          </button> */}
         </div>
       </form>
     </div>
   );
 };
-
-export default SearchForm;
+export default AddToListForm;

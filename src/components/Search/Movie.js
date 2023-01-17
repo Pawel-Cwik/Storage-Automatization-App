@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "../UI/Card";
 import "./Movie.module.css";
+import { useState } from "react";
 
 const myStyle = {
   borderRadius: "40px",
@@ -26,13 +27,29 @@ const expenseStyle = {
   padding: "0.5rem",
 };
 const buttonStyle = {
-  padding: "0.5rem",
-  margin: "1rem 0.5rem",
+  padding: "0.2rem",
+  margin: "0.4rem 0.001rem 0.01rem 0.4rem",
   backgroundColor: "white",
   color: "black",
+  display: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  borderRadius: "5px",
+};
+const divColumn = {
+  display: "flex",
+  flexDirection: "column",
 };
 
 const Movie = (props) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const startEditingHandler = () => {
+    setIsEditing(true);
+    console.log(this);
+  };
+  const stopEditingHandler = () => {
+    setIsEditing(false);
+  };
   return (
     <li>
       <div style={myStyle}>
@@ -48,7 +65,23 @@ const Movie = (props) => {
         <div>
           <h3>{props.releaseDate}</h3>
         </div>
-        <button style={buttonStyle}>Edit</button>
+        <div style={divColumn}>
+          {!isEditing && (
+            <button style={buttonStyle} onClick={startEditingHandler}>
+              Edit
+            </button>
+          )}
+          {isEditing && (
+            <button style={buttonStyle} onClick={stopEditingHandler}>
+              Save
+            </button>
+          )}
+          {isEditing && (
+            <button style={buttonStyle} onClick={stopEditingHandler}>
+              Cancel
+            </button>
+          )}
+        </div>
       </div>
     </li>
   );

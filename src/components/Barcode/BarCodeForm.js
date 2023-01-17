@@ -2,6 +2,7 @@ import { clear } from "@testing-library/user-event/dist/clear";
 import { useState } from "react";
 import "../Search/ActivateSearch.css";
 import MovieList from "../Search/MoviesList";
+import React from "react";
 
 const BarCodeForm = (props) => {
   const [enteredCode, setEnteredCode] = useState("");

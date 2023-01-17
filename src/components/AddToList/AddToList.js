@@ -1,9 +1,10 @@
 import React from "react";
 import TopBar from "../Search/TopBar";
-import ActivateBarCodeSearch from "./ActivateBarCodeSearch";
+import AcivateAddToList from "./ActivateAddToList";
 import MoviesList from "../Search/MoviesList";
-
-function BarCode(props) {
+import "../Search/ActivateSearch.css";
+import "../Search/Search.css";
+function AddToList(props) {
   const [content, setContent] = React.useState([]);
 
   const handleContent = (data) => {
@@ -15,12 +16,10 @@ function BarCode(props) {
     <div>
       <TopBar></TopBar>
       <div>
-        <ActivateBarCodeSearch
-          handleContent={handleContent}
-        ></ActivateBarCodeSearch>
+        <AcivateAddToList handleContent={handleContent}></AcivateAddToList>
         {isContent && <MoviesList movies={content}></MoviesList>}
       </div>
     </div>
   );
 }
-export default BarCode;
+export default AddToList;

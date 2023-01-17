@@ -1,5 +1,5 @@
 import ShowAllDisplay from "./ShowAllDisplay";
-
+import React from "react";
 const ListSearch = (props) => {
   return (
     <ul className={["movies-list"]}>

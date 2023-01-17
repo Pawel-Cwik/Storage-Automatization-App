@@ -4,7 +4,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useState } from "react";
 import LoginRegister from "./components/LoginRegister";
-import AddToList from "./components/AddToList";
+import AddToList from "./components/AddToList/AddToList";
 import BarCode from "./components/Barcode/BarCode";
 import Search from "./components/Search/Search";
 function App() {
