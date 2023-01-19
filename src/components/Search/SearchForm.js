@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./SearchForm.css";
 import MoviesList from "./MoviesList";
 import React from "react";
+import Swal from "sweetalert2";
 const SearchForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredProducer, setEnteredProducer] = useState("NULL");
@@ -34,7 +35,7 @@ const SearchForm = (props) => {
   const [error, setError] = useState(null);
 
   async function fetchByNameProducerLocationHandler() {
-    setIsLoading(true);
+    Swal.showLoading();
     setError(null);
 
     if (enteredTitle.length === 0) {
@@ -63,12 +64,12 @@ const SearchForm = (props) => {
           };
         });
         setMovies(transformedMovies);
-        setIsLoading(false);
+        Swal.hideLoading(Swal.close());
         props.handleContent(transformedMovies);
       } catch (error) {
         setError(error.message);
       }
-      setIsLoading(false);
+      Swal.hideLoading(Swal.close());
 
       // jeżeli tak, to fetch na null/${producer}/${location}
       // Jeżeli ni to fetch na ${title}/${producer}/${location}
@@ -102,12 +103,12 @@ const SearchForm = (props) => {
           };
         });
         setMovies(transformedMovies);
-        setIsLoading(false);
+        Swal.hideLoading(Swal.close());
         props.handleContent(transformedMovies);
       } catch (error) {
         setError(error.message);
       }
-      setIsLoading(false);
+      Swal.hideLoading(Swal.close());
 
       // jeżeli tak, to fetch na null/${producer}/${location}
       // Jeżeli ni to fetch na ${title}/${producer}/${location}
@@ -120,7 +121,7 @@ const SearchForm = (props) => {
     console.log(eneteredLoc);
   }
   async function fetchMoviesHandler() {
-    setIsLoading(true);
+    Swal.showLoading();
     setError(null);
     console.log("Test1");
     try {
@@ -147,12 +148,12 @@ const SearchForm = (props) => {
         };
       });
       setMovies(transformedMovies);
-      setIsLoading(false);
+      Swal.hideLoading(Swal.close());
       props.handleContent(transformedMovies);
     } catch (error) {
       setError(error.message);
     }
-    setIsLoading(false);
+    Swal.hideLoading(Swal.close());
   }
 
   let content = <p>Found no movies.</p>;

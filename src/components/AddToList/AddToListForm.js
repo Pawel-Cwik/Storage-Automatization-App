@@ -3,11 +3,17 @@ import "../Search/ActivateSearch.css";
 import MoviesList from "../Search/MoviesList";
 import React from "react";
 import AddingAlert from "../SAlerts/AddingAlert";
+import AddingAlertConfirm from "../SAlerts/AddingAlertConfirm";
+
 const AddToListForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredProducer, setEnteredProducer] = useState("NULL");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [eneteredLoc, setEnteredLoc] = useState("NULL");
+  const [condAdding, setCondAdding] = useState(false);
+  const handleConfirm = (data) => {
+    setCondAdding(data);
+  };
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -70,8 +76,67 @@ const AddToListForm = (props) => {
       console.log(data[1][0]);
       console.log(data[0]);
       if (data[0] === "DB") {
-        AddingAlert();
+        AddingAlert(transformedMovies[1], handleConfirm);
       }
+      if (data[0] === "NEW") {
+        AddingAlertConfirm(transformedMovies[1]);
+      }
+      console.log("TEST2");
+      setMovies(transformedMovies[0]);
+      setIsLoading(false);
+      props.handleContent([transformedMovies[1]]);
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
+
+    console.log("Test1");
+    console.log(enteredTitle);
+    console.log(enteredProducer);
+    console.log(eneteredLoc);
+    console.log(enteredAmount);
+  }
+  if (condAdding === true) {
+    addToListCondHandler();
+  }
+  async function addToListCondHandler() {
+    setIsLoading(true);
+    setError(null);
+    console.log("DODAWANIE WARUNKOWE");
+    setCondAdding(false);
+    try {
+      const fillSpacesProducer = enteredProducer.replaceAll(" ", "_");
+      const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
+      const fillAmount = enteredAmount.replaceAll(" ", "_");
+
+      const Response = await fetch(
+        `http://cors-anywhere.herokuapp.com/http://gestampmagazyn.pythonanywhere.com/add_item_cond/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}/`
+      );
+
+      if (!Response.ok) {
+        console.log("TEST2 WIADOMOSC NIE DOTARLA");
+
+        throw new Error("Something went wrong!");
+      }
+      console.log("TEST2 WIADOMOSC DOTARLA");
+      const data = await Response.json();
+      console.log(data);
+
+      const transformedMovies = data.map((movieData) => {
+        return {
+          id_przedmiotu: data[1][0].id_przedmiotu,
+          nazwa: data[1][0].nazwa,
+          producent: data[1][0].producent,
+          ilosc: data[1][0].ilosc,
+          lokalizacja: data[1][1].Nazwa_przestrzeni_skladowania,
+        };
+      });
+      console.log(data[1][0]);
+      console.log(data[0]);
+      if (data[0] === "DB") {
+        AddingAlert(transformedMovies[1], handleConfirm);
+      }
+      console.log("TEST2");
       setMovies(transformedMovies[0]);
       setIsLoading(false);
       props.handleContent([transformedMovies[1]]);
@@ -87,6 +152,9 @@ const AddToListForm = (props) => {
     console.log(enteredAmount);
   }
 
+  console.log(condAdding);
+
+  // O TUTAJ JESTEM W STANIE MIEĆ TRUE
   let content = <p>Found no movies.</p>;
   if (movies.length > 0) {
     content = <MoviesList movies={movies}></MoviesList>;

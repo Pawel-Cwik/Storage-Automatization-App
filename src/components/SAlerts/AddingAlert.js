@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 import "./AddingAlert.css";
-const AddingAlert = () => {
+const AddingAlert = (props, handleConfirm) => {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
       confirmButton: "btn btn-success",
@@ -11,30 +11,32 @@ const AddingAlert = () => {
 
   swalWithBootstrapButtons
     .fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Na pewno chcesz dodać ten przedmiot?",
+      text:
+        "Taki przedmiot istnieje już w bazie danych, czy mimo to chcesz go dodać?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
+      confirmButtonText: "Dodaj przedmiot, mimo to.",
+      cancelButtonText: "Nie, anuluj.",
       reverseButtons: true,
     })
     .then((result) => {
       if (result.isConfirmed) {
         swalWithBootstrapButtons.fire(
-          "Deleted!",
-          "Your file has been deleted.",
+          "Dodano!",
+          `Przedmiot ${props.nazwa}, został dodany do bazy danych`,
           "success"
         );
+        handleConfirm(true);
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(
-          "Cancelled",
-          "Your imaginary file is safe :)",
+          "Anulowano",
+          "Przedmiot nie został dodany do bazy danych.",
           "error"
         );
       }

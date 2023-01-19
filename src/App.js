@@ -7,6 +7,7 @@ import LoginRegister from "./components/LoginRegister";
 import AddToList from "./components/AddToList/AddToList";
 import BarCode from "./components/Barcode/BarCode";
 import Search from "./components/Search/Search";
+
 function App() {
   const [currentForm, setCurrentForm] = useState("login");
 
