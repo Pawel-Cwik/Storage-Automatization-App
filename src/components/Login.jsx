@@ -16,6 +16,7 @@ const Login = (props) => {
   };
   const checkLogin = () => {
     if (login === "admin" && pass === "admin") {
+      console.log("Login correct");
       navigateHome();
     } else {
       alert("Login or password incorrect");
