@@ -18,13 +18,6 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route element={<PrivateRoutes />}>
-            <Route element={<Home />} path="/" exact></Route>
-            <Route element={<AddToList />} path="/AddToList" exact></Route>
-            <Route element={<BarCode />} path="/Barcode" exact></Route>
-            <Route element={<Search />} path="/Search" exact></Route>
-          </Route>
-
           <Route
             element={
               <LoginRegister
@@ -34,6 +27,12 @@ function App() {
             }
             path="/login"
           ></Route>
+          <Route element={<PrivateRoutes />}>
+            <Route element={<Home />} path="/" exact></Route>
+            <Route element={<AddToList />} path="/AddToList" exact></Route>
+            <Route element={<BarCode />} path="/Barcode" exact></Route>
+            <Route element={<Search />} path="/Search" exact></Route>
+          </Route>
         </Routes>
       </Router>
     </div>

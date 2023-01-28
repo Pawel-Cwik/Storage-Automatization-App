@@ -21,6 +21,7 @@ const MovieList = (props) => {
         {props.movies.map((movie) => (
           <Movie
             key={movie.id_przedmiotu}
+            id_przedmiotu={movie.id_przedmiotu}
             title={movie.nazwa}
             releaseDate={movie.ilosc}
             Producer={movie.producent}
@@ -33,3 +34,11 @@ const MovieList = (props) => {
 };
 
 export default MovieList;
+// {
+//   statusEditLoc && (
+//     <input
+//       value={props.statusLoc}
+//       onChange={(e) => setStatusLoc(e.target.value)}
+//     ></input>
+//   );
+// }

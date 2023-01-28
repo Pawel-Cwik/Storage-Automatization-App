@@ -63,18 +63,17 @@ const AddToListForm = (props) => {
       console.log("TEST2 WIADOMOSC DOTARLA");
       const data = await Response.json();
       console.log(data);
-
+      console.log("DATA |");
       const transformedMovies = data.map((movieData) => {
         return {
-          id_przedmiotu: data[1][0].id_przedmiotu,
-          nazwa: data[1][0].nazwa,
-          producent: data[1][0].producent,
-          ilosc: data[1][0].ilosc,
-          lokalizacja: data[1][1].Nazwa_przestrzeni_skladowania,
+          id_przedmiotu: movieData[0].id_przedmiotu,
+          nazwa: movieData[0].nazwa,
+          producent: movieData[0].producent,
+          ilosc: movieData[0].ilosc,
+          lokalizacja: movieData[1].Nazwa_przestrzeni_skladowania,
         };
       });
-      console.log(data[1][0]);
-      console.log(data[0]);
+
       if (data[0] === "DB") {
         AddingAlert(transformedMovies[1], handleConfirm);
       }
@@ -82,19 +81,17 @@ const AddToListForm = (props) => {
         AddingAlertConfirm(transformedMovies[1]);
       }
       console.log("TEST2");
+      console.log(transformedMovies);
+      console.log([transformedMovies[1]]);
+      console.log(transformedMovies[0]);
       setMovies(transformedMovies[0]);
       setIsLoading(false);
-      props.handleContent([transformedMovies[1]]);
+      props.handleContent(transformedMovies.slice(1));
+      console.log(transformedMovies.slice(1));
     } catch (error) {
       setError(error.message);
     }
     setIsLoading(false);
-
-    console.log("Test1");
-    console.log(enteredTitle);
-    console.log(enteredProducer);
-    console.log(eneteredLoc);
-    console.log(enteredAmount);
   }
   if (condAdding === true) {
     addToListCondHandler();
@@ -136,23 +133,20 @@ const AddToListForm = (props) => {
       if (data[0] === "DB") {
         AddingAlert(transformedMovies[1], handleConfirm);
       }
-      console.log("TEST2");
+
       setMovies(transformedMovies[0]);
       setIsLoading(false);
       props.handleContent([transformedMovies[1]]);
+      console.log("TEST2");
+      console.log(transformedMovies);
+      console.log([transformedMovies[1]]);
+      console.log(transformedMovies[0]);
+      setMovies(transformedMovies[0]);
     } catch (error) {
       setError(error.message);
     }
     setIsLoading(false);
-
-    console.log("Test1");
-    console.log(enteredTitle);
-    console.log(enteredProducer);
-    console.log(eneteredLoc);
-    console.log(enteredAmount);
   }
-
-  console.log(condAdding);
 
   // O TUTAJ JESTEM W STANIE MIEĆ TRUE
   let content = <p>Found no movies.</p>;

@@ -4,7 +4,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import GestampLogo from "../images/Gestamp-Logo.png";
 
 const Login = (props) => {
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,8 +15,10 @@ const Login = (props) => {
     navigate("/");
   };
   const checkLogin = () => {
-    if (email === "admin" && pass === "admin") {
+    if (login === "admin" && pass === "admin") {
       navigateHome();
+    } else {
+      alert("Login or password incorrect");
     }
   };
 
@@ -26,16 +28,16 @@ const Login = (props) => {
         <img className="Logo" src={GestampLogo} alt="GestampLogo"></img>
         <h2>Login</h2>
         <form className="login-form" onSubmit={handleSubmit}>
-          <label htmlFor="email">email</label>
+          <label htmlFor="email">Login</label>
           <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            placeholder="youremail@gmail.com"
-            id="email"
-            name="email"
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
+            type="text"
+            placeholder="Login"
+            id="Login"
+            name="Login"
           ></input>
-          <label htmlFor="password">password</label>
+          <label htmlFor="password">Password</label>
           <input
             value={pass}
             onChange={(e) => setPass(e.target.value)}
