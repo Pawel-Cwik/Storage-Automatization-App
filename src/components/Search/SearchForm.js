@@ -42,7 +42,7 @@ const SearchForm = (props) => {
       try {
         const fillSpaces = enteredProducer.replaceAll(" ", "_");
         const Response = await fetch(
-          `http://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/search_for/NULL/${eneteredLoc}/${fillSpaces}/`
+          `https://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/search_for/NULL/${eneteredLoc}/${fillSpaces}/`
         );
 
         if (!Response.ok) {
@@ -50,7 +50,7 @@ const SearchForm = (props) => {
 
           throw new Error("Something went wrong!");
         }
-        console.log("TEST2 WIADOMOSC DOTARLA");
+        console.log("TEST2 WIADOMOSC DOTARLAA");
         const data = await Response.json();
         console.log(data);
 
@@ -81,7 +81,7 @@ const SearchForm = (props) => {
         const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
 
         const Response = await fetch(
-          `http://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/search_for/${fillSpacesTitle}/${eneteredLoc}/${fillSpacesProducer}/`
+          `https://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/search_for/${fillSpacesTitle}/${eneteredLoc}/${fillSpacesProducer}/`
         );
 
         if (!Response.ok) {
@@ -126,7 +126,7 @@ const SearchForm = (props) => {
     console.log("Test1");
     try {
       const Response = await fetch(
-        "http://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/download_all_items/"
+        "https://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/download_all_items/"
       );
 
       if (!Response.ok) {

@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import GestampLogo from "../images/Gestamp-Logo.png";
-
+import background from "../images/background.jpg";
+const backGroundStyle = {
+  backgroundImage: `url(${background})`,
+  backgroundSize: "cover",
+};
 const Login = (props) => {
   const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
@@ -24,12 +28,17 @@ const Login = (props) => {
   };
 
   return (
-    <div className="Login">
+    <div className="Login" style={backGroundStyle}>
       <div className="auth-form-container">
         <img className="Logo" src={GestampLogo} alt="GestampLogo"></img>
-        <h2>Login</h2>
+        <h2 style={{ color: "black" }}>Logowanie</h2>
         <form className="login-form" onSubmit={handleSubmit}>
-          <label htmlFor="email">Login</label>
+          <label
+            style={{ color: "black", marginBottom: "10px" }}
+            htmlFor="email"
+          >
+            Login
+          </label>
           <input
             value={login}
             onChange={(e) => setLogin(e.target.value)}
@@ -38,7 +47,12 @@ const Login = (props) => {
             id="Login"
             name="Login"
           ></input>
-          <label htmlFor="password">Password</label>
+          <label
+            style={{ color: "black", marginBottom: "10px" }}
+            htmlFor="password"
+          >
+            Hasło
+          </label>
           <input
             value={pass}
             onChange={(e) => setPass(e.target.value)}
@@ -48,15 +62,19 @@ const Login = (props) => {
             name="password"
           ></input>
           {/* <button type="submit">Log In</button> */}
-          <button-login-register onClick={checkLogin}>
-            Log in
+          <button-login-register
+            style={{ display: "center", margin: "auto" }}
+            onClick={checkLogin}
+          >
+            Zaloguj Się
           </button-login-register>
         </form>
         <button
+          style={{ color: "black" }}
           className="link-btn"
           onClick={() => props.onFormSwitch("register")}
         >
-          Don't have an account? Register here.
+          Nie masz konta? Zarejestruj się tutaj.
         </button>
       </div>
     </div>

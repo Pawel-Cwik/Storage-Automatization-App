@@ -52,7 +52,7 @@ const AddToListForm = (props) => {
       const fillAmount = enteredAmount.replaceAll(" ", "_");
 
       const Response = await fetch(
-        `http://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/test2/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}`
+        `https://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/test2/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}`
       );
 
       if (!Response.ok) {
@@ -107,7 +107,7 @@ const AddToListForm = (props) => {
       const fillAmount = enteredAmount.replaceAll(" ", "_");
 
       const Response = await fetch(
-        `http://cors-anywhere.herokuapp.com/http://gestampmagazyn.pythonanywhere.com/add_item_cond/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}/`
+        `https://cors-anywhere.herokuapp.com/http://gestampmagazyn.pythonanywhere.com/add_item_cond/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}/`
       );
 
       if (!Response.ok) {

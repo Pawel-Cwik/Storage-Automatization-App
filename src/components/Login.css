@@ -5,8 +5,7 @@
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: #597cbe;
-  padding: 5rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -16,6 +15,8 @@
   border: 1px solid white;
   border-radius: 10px;
   margin: 0.5 rem;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 6);
+  background-color: white;
 }
 .auth-form-container {
   padding: 5rem;
@@ -39,21 +40,22 @@ input {
   border: none;
   border-radius: 10px;
   margin-bottom: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 6);
 }
 
 button-login-register {
-  background-color: #510674;
-  border-color: #510674;
-
-  padding: 20px;
-  border-radius: 10px;
+  background-color: #3880ff;
+  border-color: #3880ff;
+  width: 50%;
+  padding: 15px;
+  border-radius: 50px;
   cursor: pointer;
   color: white;
 }
 
 .link-btn {
   background: none;
-  color: white;
+  color: black;
   text-decoration: underline;
 }
 
@@ -67,4 +69,5 @@ button-login-register {
   align-items: center;
   margin-bottom: 20px;
   border-radius: 10px;
+  object-fit: cover;
 }

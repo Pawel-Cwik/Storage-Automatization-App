@@ -78,7 +78,7 @@ const Movie = (props) => {
     setStatusAmount(statusAmountChange);
     setStatusLoc(statusLocChange);
     const Response = await fetch(
-      `http://cors-anywhere.herokuapp.com/http://gestampmagazyn.pythonanywhere.com/test_edit/${props.id_przedmiotu}/${statusLocChange}/${statusAmountChange}/`
+      `https://cors-anywhere.herokuapp.com/http://gestampmagazyn.pythonanywhere.com/test_edit/${props.id_przedmiotu}/${statusLocChange}/${statusAmountChange}/`
     );
     console.log(`${statusLocChange}, ${statusAmountChange} LALALALALLALAL`);
     if (!Response.ok) {

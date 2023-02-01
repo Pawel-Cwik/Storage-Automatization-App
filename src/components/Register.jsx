@@ -1,34 +1,61 @@
 import React, { useState } from "react";
 import "./Register.css";
 import GestampLogo from "../images/Gestamp-Logo.png";
-
+import "./Login.css";
+import background from "../images/background.jpg";
+const backGroundStyle = {
+  backgroundImage: `url(${background})`,
+  backgroundSize: "cover",
+};
 const Register = (props) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [name, setName] = useState("");
+  const [login, setLogin] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmits = (e) => {
     e.preventDefault();
   };
 
   return (
-    <div className="Register">
+    <div className="Register" style={backGroundStyle}>
       <div className="auth-form-container">
         <img className="Logo" src={GestampLogo} alt="GestampLogo"></img>
-        <h2>Register</h2>
-        <form className="register-form" onSubmit={handleSubmit}>
-          <label htmlFor="name">Full Name</label>
-          <input value={name} name="name" id="name" placeholder="full Name" />
-          <label htmlFor="email">email</label>
+        <h2 style={{ color: "black" }}>Rejestracja</h2>
+        <form className="register-form" onSubmit={handleSubmits}>
+          <label
+            style={{ color: "black", marginBottom: "10px" }}
+            htmlFor="email"
+          >
+            E-mail
+          </label>
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
-            placeholder="youremail@gmail.com"
+            placeholder="E-mail"
             id="email"
             name="email"
           ></input>
-          <label htmlFor="password">password</label>
+          <label
+            style={{ color: "black", marginBottom: "10px" }}
+            htmlFor="email"
+          >
+            Login
+          </label>
+          <input
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
+            type="text"
+            placeholder="Login"
+            id="Login"
+            name="Login"
+          ></input>
+          <label
+            style={{ color: "black", marginBottom: "10px" }}
+            htmlFor="password"
+          >
+            Hasło
+          </label>
           <input
             value={pass}
             onChange={(e) => setPass(e.target.value)}
@@ -37,12 +64,11 @@ const Register = (props) => {
             id="password"
             name="password"
           ></input>
-          <button type="submit">Register</button>
+          <button-login-register style={{ display: "center", margin: "auto" }}>
+            Register
+          </button-login-register>
         </form>
-        <button
-          className="link-btn"
-          onClick={() => props.onFormSwitch("login")}
-        >
+        <button onClick={() => props.onFormSwitch("login")}>
           Already have an account? Login here.
         </button>
       </div>

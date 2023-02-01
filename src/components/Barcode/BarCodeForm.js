@@ -30,7 +30,7 @@ const BarCodeForm = (props) => {
     console.log("Test1");
     try {
       const Response = await fetch(
-        `http://cors-anywhere.herokuapp.com/http://gestampmagazyn.pythonanywhere.com/search_id/${enteredCode}/`
+        `https://cors-anywhere.herokuapp.com/http://gestampmagazyn.pythonanywhere.com/search_id/${enteredCode}/`
       );
 
       if (!Response.ok) {
