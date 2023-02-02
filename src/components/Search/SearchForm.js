@@ -3,6 +3,7 @@ import "./SearchForm.css";
 import MoviesList from "./MoviesList";
 import React from "react";
 import Swal from "sweetalert2";
+
 const SearchForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredProducer, setEnteredProducer] = useState("NULL");
@@ -24,7 +25,7 @@ const SearchForm = (props) => {
       ilosc: +enteredAmount,
       lokalizacja: eneteredLoc,
     };
-    props.onSaveExpenseData(expenseData);
+
     setEnteredTitle("");
     setEnteredProducer("");
     setEnteredAmount("");
@@ -42,7 +43,7 @@ const SearchForm = (props) => {
       try {
         const fillSpaces = enteredProducer.replaceAll(" ", "_");
         const Response = await fetch(
-          `https://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/search_for/NULL/${eneteredLoc}/${fillSpaces}/`
+          `https://gestampmagazyn.pythonanywhere.com/search_for/NULL/${eneteredLoc}/${fillSpaces}/`
         );
 
         if (!Response.ok) {
@@ -53,6 +54,13 @@ const SearchForm = (props) => {
         console.log("TEST2 WIADOMOSC DOTARLAA");
         const data = await Response.json();
         console.log(data);
+        if (data === "BRAK") {
+          return Swal.fire(
+            "Brak wyników",
+            `Nie znaleziono przedmiotów spełniających podane kryteria`,
+            "error"
+          );
+        }
 
         const transformedMovies = data.map((movieData) => {
           return {
@@ -81,7 +89,7 @@ const SearchForm = (props) => {
         const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
 
         const Response = await fetch(
-          `https://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/search_for/${fillSpacesTitle}/${eneteredLoc}/${fillSpacesProducer}/`
+          `https://gestampmagazyn.pythonanywhere.com/search_for/${fillSpacesTitle}/${eneteredLoc}/${fillSpacesProducer}/`
         );
 
         if (!Response.ok) {
@@ -92,6 +100,13 @@ const SearchForm = (props) => {
         console.log("TEST2 WIADOMOSC DOTARLA");
         const data = await Response.json();
         console.log(data);
+        if (data === "BRAK") {
+          return Swal.fire(
+            "Brak wyników",
+            `Nie znaleziono przedmiotów spełniających podane kryteria`,
+            "error"
+          );
+        }
 
         const transformedMovies = data.map((movieData) => {
           return {
@@ -126,7 +141,7 @@ const SearchForm = (props) => {
     console.log("Test1");
     try {
       const Response = await fetch(
-        "https://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/download_all_items/"
+        "https://gestampmagazyn.pythonanywhere.com/download_all_items/"
       );
 
       if (!Response.ok) {
@@ -155,6 +170,21 @@ const SearchForm = (props) => {
     }
     Swal.hideLoading(Swal.close());
   }
+  useEffect(() => {
+    const enterClickedHandler = (event) => {
+      if (event.key === "Enter") {
+        console.log("ENTER");
+        console.log(eneteredLoc);
+        console.log(enteredProducer);
+        console.log(enteredTitle);
+        fetchByNameProducerLocationHandler();
+      }
+    };
+    document.addEventListener("keydown", enterClickedHandler);
+    return () => {
+      document.removeEventListener("keydown", enterClickedHandler);
+    };
+  }, [eneteredLoc, enteredProducer, enteredTitle]);
 
   let content = <p>Found no movies.</p>;
   if (movies.length > 0) {
@@ -172,7 +202,7 @@ const SearchForm = (props) => {
       <form onSubmit={submitHandler}>
         <div className="'search-form__controls">
           <div className="search-form__control">
-            <label>Search</label>
+            <label>Nazwa</label>
             <input
               type="text"
               value={enteredTitle}
@@ -180,7 +210,7 @@ const SearchForm = (props) => {
             ></input>
           </div>
           <div className="search-form__control">
-            <label>Producer</label>
+            <label>Producent</label>
             <select
               className="search-form_selected"
               onChange={(e) => setEnteredProducer(e.target.value)}
@@ -244,7 +274,7 @@ const SearchForm = (props) => {
               <option value="YASKAWA">YASKAWA</option>
               <option value="ZIEHL-ABEGG">ZIEHL-ABEGG</option>
             </select>
-            <label>Location</label>
+            <label>Lokalizacja</label>
             <select
               className="search-form_selected"
               onChange={(e) => setEnteredLoc(e.target.value)}
@@ -320,14 +350,18 @@ const SearchForm = (props) => {
         </div>
 
         <div className="search-form__actions">
-          <button type="button" onClick={fetchMoviesHandler}>
-            Show all
+          <button
+            style={{ marginRight: "21rem" }}
+            type="button"
+            onClick={fetchMoviesHandler}
+          >
+            Pokaż wszystkie
           </button>
           <button type="button" onClick={props.onCancel}>
-            Cancel
+            Anuluj
           </button>
           <button type="button" onClick={fetchByNameProducerLocationHandler}>
-            Search
+            Wyszukaj
           </button>
         </div>
       </form>

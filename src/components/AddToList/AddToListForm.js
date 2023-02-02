@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../Search/ActivateSearch.css";
 import MoviesList from "../Search/MoviesList";
 import React from "react";
@@ -52,7 +52,7 @@ const AddToListForm = (props) => {
       const fillAmount = enteredAmount.replaceAll(" ", "_");
 
       const Response = await fetch(
-        `https://cors-anywhere.herokuapp.com/https://gestampmagazyn.pythonanywhere.com/test2/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}`
+        `https://gestampmagazyn.pythonanywhere.com/test2/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}`
       );
 
       if (!Response.ok) {
@@ -107,7 +107,7 @@ const AddToListForm = (props) => {
       const fillAmount = enteredAmount.replaceAll(" ", "_");
 
       const Response = await fetch(
-        `https://cors-anywhere.herokuapp.com/http://gestampmagazyn.pythonanywhere.com/add_item_cond/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}/`
+        `https://gestampmagazyn.pythonanywhere.com/add_item_cond/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}/`
       );
 
       if (!Response.ok) {
@@ -148,6 +148,19 @@ const AddToListForm = (props) => {
     setIsLoading(false);
   }
 
+  useEffect(() => {
+    const enterClickedHandler = (event) => {
+      if (event.key === "Enter") {
+        console.log("ENTER");
+
+        addToListHandler();
+      }
+    };
+    document.addEventListener("keydown", enterClickedHandler);
+    return () => {
+      document.removeEventListener("keydown", enterClickedHandler);
+    };
+  }, [eneteredLoc, enteredProducer, enteredTitle, enteredAmount]);
   // O TUTAJ JESTEM W STANIE MIEĆ TRUE
   let content = <p>Found no movies.</p>;
   if (movies.length > 0) {
@@ -165,7 +178,7 @@ const AddToListForm = (props) => {
       <form onSubmit={submitHandler}>
         <div className="'search-form__controls">
           <div className="search-form__control">
-            <label>Name</label>
+            <label>Nazwa</label>
             <input
               type="text"
               value={enteredTitle}
@@ -173,7 +186,7 @@ const AddToListForm = (props) => {
             ></input>
           </div>
           <div className="search-form__control">
-            <label>Producer</label>
+            <label>Producent</label>
             <select
               className="search-form_selected"
               onChange={(e) => setEnteredProducer(e.target.value)}
@@ -237,7 +250,7 @@ const AddToListForm = (props) => {
               <option value="YASKAWA">YASKAWA</option>
               <option value="ZIEHL-ABEGG">ZIEHL-ABEGG</option>
             </select>
-            <label>Location</label>
+            <label>Lokalizacja</label>
             <select
               className="search-form_selected"
               onChange={(e) => setEnteredLoc(e.target.value)}
@@ -311,7 +324,7 @@ const AddToListForm = (props) => {
             </select>
           </div>
           <div className="search-form__control">
-            <label>Amount</label>
+            <label>Ilość</label>
             <input
               type="text"
               value={enteredAmount}
@@ -321,11 +334,15 @@ const AddToListForm = (props) => {
         </div>
 
         <div className="search-form__actions">
-          <button type="button" onClick={addToListHandler}>
-            Add
+          <button
+            style={{ marginLeft: "65%" }}
+            type="button"
+            onClick={addToListHandler}
+          >
+            Dodaj
           </button>
           <button type="button" onClick={props.onCancel}>
-            Cancel
+            Anuluj
           </button>
           {/* <button type="button" onClick={fetchByNameProducerLocationHandler}>
             Accept

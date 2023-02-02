@@ -13,7 +13,11 @@ export default function ActivateBarCodeSearch(props) {
 
   return (
     <div className="search-form">
-      {!isEditing && <button onClick={startEditingHandler}>Search</button>}
+      {!isEditing && (
+        <button onClick={startEditingHandler}>
+          Wyszukaj po kodzie kreskowym
+        </button>
+      )}
       {isEditing && (
         <BarCodeForm
           onCancel={stopEditingHandler}

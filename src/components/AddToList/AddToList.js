@@ -4,6 +4,7 @@ import AcivateAddToList from "./ActivateAddToList";
 import MoviesList from "../Search/MoviesList";
 import "../Search/ActivateSearch.css";
 import "../Search/Search.css";
+
 function AddToList(props) {
   const [content, setContent] = React.useState([]);
 

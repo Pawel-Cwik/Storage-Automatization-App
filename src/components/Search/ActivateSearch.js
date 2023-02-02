@@ -13,7 +13,9 @@ export default function ActivateSearch(props) {
 
   return (
     <div className="search-form">
-      {!isEditing && <button onClick={startEditingHandler}>Search</button>}
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Wyszukaj przedmiot</button>
+      )}
       {isEditing && (
         <SearchForm
           onCancel={stopEditingHandler}

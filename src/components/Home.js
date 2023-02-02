@@ -4,6 +4,8 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import barcode from "../images/barcode.png";
 import search from "../images/search.png";
 import "./Home.css";
+import TopBar from "./Search/TopBar";
+import background from "../images/background.jpg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -19,6 +21,11 @@ const Home = () => {
     // 👇️ navigate to /
     navigate("/Search");
   };
+  const backGroundStyle = {
+    backgroundImage: `url(${background})`,
+    backgroundSize: "cover",
+    height: "100vh",
+  };
   const mystyle = {
     height: 150,
     width: 150,
@@ -27,46 +34,49 @@ const Home = () => {
     // CSS CODE
   };
   return (
-    <div className="Home">
-      <div className="container">
-        <img
-          src={addtolist}
-          alt="Avatar"
-          class="image"
-          style={mystyle}
-          onClick={addToListPage}
-        ></img>
-        <div className="middle" onClick={addToListPage}>
-          <div className="text" onClick={addToListPage}>
-            Add to list
+    <div style={backGroundStyle}>
+      <TopBar></TopBar>
+      <div className="Home">
+        <div className="container">
+          <img
+            src={addtolist}
+            alt="Avatar"
+            class="image"
+            style={mystyle}
+            onClick={addToListPage}
+          ></img>
+          <div className="middle" onClick={addToListPage}>
+            <div className="text" onClick={addToListPage}>
+              Dodaj do bazy przedmiotów
+            </div>
           </div>
         </div>
-      </div>
-      <div className="container">
-        <img
-          src={search}
-          alt="search"
-          class="image"
-          style={mystyle}
-          onClick={searchPage}
-        ></img>
-        <div className="middle" onClick={searchPage}>
-          <div className="text" onClick={searchPage}>
-            Search
+        <div className="container">
+          <img
+            src={search}
+            alt="search"
+            class="image"
+            style={mystyle}
+            onClick={searchPage}
+          ></img>
+          <div className="middle" onClick={searchPage}>
+            <div className="text" onClick={searchPage}>
+              Wyszukaj przedmiot
+            </div>
           </div>
         </div>
-      </div>
-      <div className="container">
-        <img
-          src={barcode}
-          alt="Avatar"
-          class="image"
-          style={mystyle}
-          onClick={barCodePage}
-        ></img>
-        <div className="middle" onClick={barCodePage}>
-          <div className="text" onClick={barCodePage}>
-            Barcode
+        <div className="container">
+          <img
+            src={barcode}
+            alt="Avatar"
+            class="image"
+            style={mystyle}
+            onClick={barCodePage}
+          ></img>
+          <div className="middle" onClick={barCodePage}>
+            <div className="text" onClick={barCodePage}>
+              Wyszukaj po kodzie QR
+            </div>
           </div>
         </div>
       </div>

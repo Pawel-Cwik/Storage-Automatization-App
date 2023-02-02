@@ -3,6 +3,7 @@ import "./Register.css";
 import GestampLogo from "../images/Gestamp-Logo.png";
 import "./Login.css";
 import background from "../images/background.jpg";
+import { useEffect } from "react";
 const backGroundStyle = {
   backgroundImage: `url(${background})`,
   backgroundSize: "cover",
@@ -15,7 +16,17 @@ const Register = (props) => {
   const handleSubmits = (e) => {
     e.preventDefault();
   };
-
+  useEffect(() => {
+    const enterRegisterHandler = (event) => {
+      if (event.key === "Enter") {
+        console.log("ENTER");
+      }
+    };
+    document.addEventListener("keydown", enterRegisterHandler);
+    return () => {
+      document.removeEventListener("keydown", enterRegisterHandler);
+    };
+  }, [login, pass]);
   return (
     <div className="Register" style={backGroundStyle}>
       <div className="auth-form-container">
@@ -69,7 +80,7 @@ const Register = (props) => {
           </button-login-register>
         </form>
         <button onClick={() => props.onFormSwitch("login")}>
-          Already have an account? Login here.
+          Masz już konto? Zaloguj się tutaj.
         </button>
       </div>
     </div>

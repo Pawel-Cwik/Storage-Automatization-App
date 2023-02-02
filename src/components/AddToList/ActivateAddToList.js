@@ -13,7 +13,9 @@ export default function ActivateAddToList(props) {
 
   return (
     <div className="search-form">
-      {!isEditing && <button onClick={startEditingHandler}>Search</button>}
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Dodaj przedmiot</button>
+      )}
       {isEditing && (
         <AddToListForm
           onCancel={stopEditingHandler}

@@ -4,8 +4,8 @@
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: #597cbe;
-  padding: 5rem;
+
+  padding: 1rem;
   box-shadow: -5px 5px 0px black; /* x-offset | y-offset | blur to 0 | color */
 }
 
@@ -20,6 +20,7 @@ div.container {
 
 .image {
   opacity: 1;
+
   display: block;
   width: 100%;
   height: auto;
@@ -48,7 +49,7 @@ div.container {
 }
 
 .container:hover .image {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .container:hover .middle {

@@ -35,6 +35,8 @@ const buttonStyle = {
   justifyContent: "center",
   alignItems: "center",
   borderRadius: "5px",
+  fontSize: "1rem",
+  fontWeight: "bold",
 };
 const divColumn = {
   display: "flex",
@@ -77,8 +79,9 @@ const Movie = (props) => {
     setStatusEditLoc(false);
     setStatusAmount(statusAmountChange);
     setStatusLoc(statusLocChange);
+    const fillAmount = statusAmountChange.replaceAll(" ", "_");
     const Response = await fetch(
-      `https://cors-anywhere.herokuapp.com/http://gestampmagazyn.pythonanywhere.com/test_edit/${props.id_przedmiotu}/${statusLocChange}/${statusAmountChange}/`
+      `https://gestampmagazyn.pythonanywhere.com/test_edit/${props.id_przedmiotu}/${statusLocChange}/${fillAmount}/`
     );
     console.log(`${statusLocChange}, ${statusAmountChange} LALALALALLALAL`);
     if (!Response.ok) {

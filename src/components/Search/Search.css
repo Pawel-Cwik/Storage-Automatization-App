@@ -1,0 +1,10 @@
+.Search {
+  display: flex;
+  min-height: 85vh;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: white;
+  padding: 1rem;
+  box-shadow: -5px 5px 0px black; /* x-offset | y-offset | blur to 0 | color */
+}

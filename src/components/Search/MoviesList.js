@@ -3,6 +3,7 @@ import Card from "../UI/Card";
 import Movie from "./Movie";
 import classes from "./MoviesList.module.css";
 import ItemPropertiesBar from "../ItemsPropertiesBar";
+
 const ItemList = {
   padding: "0.1rem",
   margin: "0.01rem auto",
