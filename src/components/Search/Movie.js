@@ -14,17 +14,46 @@ const myStyle = {
   margin: "0.5rem auto",
   backgroundColor: "#4b4b4b",
 };
-const expenseStyle = {
-  display: "flex",
+const expenseStyleName = {
   flexdirection: "column",
-  gap: "1rem",
+
   alignitems: "flexend",
   flexflow: "columnreverse",
   justifycontent: "flexstart",
   flex: "1",
   justifyContent: "center",
   alignItems: "center",
-  padding: "0.5rem",
+  // padding: "0.5rem",
+  textAlign: "start",
+  minWidth: "35%",
+  maxWidth: "35%",
+};
+const expenseStyleProducer = {
+  flexdirection: "column",
+
+  alignitems: "flexend",
+  flexflow: "columnreverse",
+  justifycontent: "flexstart",
+  flex: "1",
+  justifyContent: "center",
+  alignItems: "center",
+  // padding: "0.5rem",
+  textAlign: "start",
+  minWidth: "20%",
+  maxWidth: "30%",
+};
+
+const expenseStyle = {
+  flexdirection: "column",
+
+  alignitems: "flexend",
+  flexflow: "columnreverse",
+  justifycontent: "flexstart",
+  flex: "1",
+  justifyContent: "center",
+  alignItems: "center",
+  // padding: "0.5rem",
+  textAlign: "start",
 };
 const buttonStyle = {
   padding: "0.2rem",
@@ -49,6 +78,7 @@ const amountStyle = {
   alignItems: "center",
   padding: "0.5rem",
   borderRadius: "0px",
+  minWidth: "20%",
 };
 
 const Movie = (props) => {
@@ -108,15 +138,23 @@ const Movie = (props) => {
   return (
     <li>
       <div style={myStyle}>
-        <div style={expenseStyle}>
+        <div style={expenseStyleName}>
           <h3> {props.title}</h3>
         </div>
-        <div style={expenseStyle}>
+        <div style={expenseStyleProducer}>
           <h3>{props.Producer}</h3>
         </div>
         <div style={expenseStyle}>
           {isEditing ? (
             <select
+              style={{
+                boxShadow: "0 1px 8px rgba(0, 0, 0, 0.9)",
+                borderRadius: "6px",
+                marginTop: "8%",
+                height: "2.2rem",
+                maxWidth: "100%",
+                width: "6rem",
+              }}
               defaultValue={statusLoc}
               className="search-form_selected"
               onChange={(e) => setStatusLocChange(e.target.value)}
@@ -196,6 +234,7 @@ const Movie = (props) => {
           {""}
           {isEditing ? (
             <input
+              style={{ maxWidth: "50%", padding: "inherit", marginTop: "10%" }}
               defaultValue={statusAmount}
               onChange={(e) => {
                 setStatusAmountChange(e.target.value);
@@ -208,17 +247,17 @@ const Movie = (props) => {
         <div style={divColumn}>
           {!isEditing && (
             <button style={buttonStyle} onClick={startEditingHandler}>
-              Edit
+              Edytuj
             </button>
           )}
           {isEditing && (
             <button style={buttonStyle} onClick={sendSaveData}>
-              Save
+              Zapisz
             </button>
           )}
           {isEditing && (
             <button style={buttonStyle} onClick={stopEditingHandler}>
-              Cancel
+              Anuluj
             </button>
           )}
         </div>

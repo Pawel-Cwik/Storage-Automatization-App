@@ -8,10 +8,12 @@ const ItemList = {
   padding: "0.1rem",
   margin: "0.01rem auto",
   width: "50rem",
-  maxwidth: "95%",
+  maxwidth: "96%",
   borderradius: "12px",
   textalign: "center",
   boxshadow: "0 1px 8px rgba(0, 0, 0, 0.25)",
+  maxHeight: `${window.screen.height}` / 2,
+  overflowY: "auto",
 };
 
 const MovieList = (props) => {
