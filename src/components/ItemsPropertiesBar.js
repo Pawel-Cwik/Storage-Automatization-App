@@ -1,9 +1,9 @@
 import React from "react";
 const ItemPropertiesBarStyle = {
-  backgroundColor: "#4b4b4b",
+  backgroundColor: "rgb(222,222,222)",
   padding: "auto",
 
-  borderRadius: "30px",
+  borderRadius: "15px",
 
   boxShadow: "0 1px 8px rgba(0, 0, 0, 0.25)",
   display: "flex",

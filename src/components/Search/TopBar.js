@@ -1,6 +1,7 @@
 import "./TopBar.css";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { colors } from "@material-ui/core";
 
 const TopBar = () => {
   const navigate = useNavigate();
@@ -25,17 +26,39 @@ const TopBar = () => {
     // 👇️ navigate to /BarCode
     navigate("/BarCode");
   };
+  const buttonStyleNavi = {
+    // outline: "black solid 1px",
+    // borderRadius: "10px",
+    borderRight: "2px solid black",
+    borderRadius: "40px",
+  };
+  const buttonStyle = {
+    // outline: "black solid 1px",
+    // borderRadius: "10px",
+    borderLeft: "2px solid black",
+    borderRadius: "40px",
+  };
   // div w którym będzie 4 przyciski pierwsze i to będzie flex row i do lewej i piąty będzie osobno allgin right
   return (
     <section className="TopBar">
       <div>
-        <a onClick={navigateHome}>Home</a>
-        <a onClick={navigateAdding}>Dodawanie przedmiotów</a>
-        <a onClick={navigateSearching}>Wyszukiwanie przedmiotów</a>
-        <a onClick={navigateBarCode}>Wyszukiwanie po kodzie</a>
+        <a style={buttonStyleNavi} onClick={navigateHome}>
+          Home
+        </a>
+        <a style={buttonStyleNavi} onClick={navigateAdding}>
+          Dodawanie przedmiotów
+        </a>
+        <a style={buttonStyleNavi} onClick={navigateSearching}>
+          Wyszukiwanie przedmiotów
+        </a>
+        <a style={buttonStyleNavi} onClick={navigateBarCode}>
+          Wyszukiwanie po kodzie
+        </a>
       </div>
-      <div style={{ marginRight: "1%" }}>
-        <a onClick={logOut}>Wyloguj</a>
+      <div>
+        <a style={buttonStyle} onClick={logOut}>
+          Wyloguj
+        </a>
       </div>
     </section>
   );

@@ -6,7 +6,7 @@ import ItemPropertiesBar from "../ItemsPropertiesBar";
 
 const ItemList = {
   padding: "0.1rem",
-  margin: "0.01rem auto",
+  margin: " auto",
   width: "50rem",
   maxwidth: "96%",
   borderradius: "12px",
@@ -14,6 +14,7 @@ const ItemList = {
   boxshadow: "0 1px 8px rgba(0, 0, 0, 0.25)",
   maxHeight: `${window.screen.height}` / 2,
   overflowY: "auto",
+  overflowX: "hidden",
 };
 
 const MovieList = (props) => {

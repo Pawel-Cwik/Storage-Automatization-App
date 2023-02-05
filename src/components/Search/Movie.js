@@ -4,7 +4,7 @@ import "./Movie.module.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
 const myStyle = {
-  borderRadius: "40px",
+  borderRadius: "15px",
   boxShadow: "0 1px 8px rgba(0, 0, 0, 0.9)",
   marginTop: "10px",
   display: "flex",
@@ -12,7 +12,7 @@ const myStyle = {
   alignItems: "center",
   padding: "0.5rem",
   margin: "0.5rem auto",
-  backgroundColor: "#4b4b4b",
+  backgroundColor: "rgb(222,222,222)",
 };
 const expenseStyleName = {
   flexdirection: "column",
