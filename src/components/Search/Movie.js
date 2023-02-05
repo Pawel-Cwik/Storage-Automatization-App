@@ -3,6 +3,9 @@ import Card from "../UI/Card";
 import "./Movie.module.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { Button } from "@material-ui/core";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 const myStyle = {
   borderRadius: "15px",
   boxShadow: "0 1px 8px rgba(0, 0, 0, 0.9)",
@@ -57,9 +60,9 @@ const expenseStyle = {
 };
 const buttonStyle = {
   padding: "0.2rem",
-  margin: "0.4rem 0.001rem 0.01rem 0.4rem",
-  backgroundColor: "white",
-  color: "black",
+
+  backgroundColor: "#1976d2",
+  color: "white",
   display: "column",
   justifyContent: "center",
   alignItems: "center",
@@ -234,7 +237,12 @@ const Movie = (props) => {
           {""}
           {isEditing ? (
             <input
-              style={{ maxWidth: "50%", padding: "inherit", marginTop: "10%" }}
+              style={{
+                maxWidth: "50%",
+                padding: "inherit",
+                marginTop: "10%",
+                textAlign: "right",
+              }}
               defaultValue={statusAmount}
               onChange={(e) => {
                 setStatusAmountChange(e.target.value);
@@ -244,22 +252,36 @@ const Movie = (props) => {
             <h3> {statusAmount}</h3>
           )}
         </div>
+
         <div style={divColumn}>
           {!isEditing && (
             <button style={buttonStyle} onClick={startEditingHandler}>
               Edytuj
             </button>
           )}
+
           {isEditing && (
-            <button style={buttonStyle} onClick={sendSaveData}>
+            <Button
+              variant="contained"
+              size="small"
+              color="primary"
+              onClick={sendSaveData}
+            >
               Zapisz
-            </button>
+            </Button>
           )}
-          {isEditing && (
-            <button style={buttonStyle} onClick={stopEditingHandler}>
-              Anuluj
-            </button>
-          )}
+          <Box marginTop={1}>
+            {isEditing && (
+              <Button
+                variant="contained"
+                size="small"
+                color="secondary"
+                onClick={stopEditingHandler}
+              >
+                Anuluj
+              </Button>
+            )}
+          </Box>
         </div>
       </div>
     </li>
