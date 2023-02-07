@@ -5,7 +5,6 @@ import classes from "./MoviesList.module.css";
 import ItemPropertiesBar from "../ItemsPropertiesBar";
 
 const ItemList = {
-  padding: "0.1rem",
   margin: " auto",
   width: "50rem",
   maxwidth: "96%",

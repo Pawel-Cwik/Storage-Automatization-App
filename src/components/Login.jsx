@@ -60,7 +60,7 @@ const Login = (props) => {
         <h2 style={{ color: "black" }}>Logowanie</h2>
         <form className="login-form" onSubmit={handleSubmit}>
           <label
-            style={{ color: "black", marginBottom: "10px" }}
+            style={{ color: "black", marginBottom: "10px", marginTop: "5px" }}
             htmlFor="email"
           >
             Login
@@ -74,7 +74,7 @@ const Login = (props) => {
             name="Login"
           ></input>
           <label
-            style={{ color: "black", marginBottom: "10px" }}
+            style={{ color: "black", marginBottom: "10px", marginTop: "5px" }}
             htmlFor="password"
           >
             Hasło
@@ -89,7 +89,13 @@ const Login = (props) => {
           ></input>
           {/* <button type="submit">Log In</button> */}
           <button-login-register
-            style={{ display: "center", margin: "auto" }}
+            style={{
+              display: "center",
+              marginBottom: "auto",
+              marginTop: "10px",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
             onClick={checkLogin}
           >
             Zaloguj Się

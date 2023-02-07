@@ -6,8 +6,12 @@ import search from "../images/search.png";
 import "./Home.css";
 import TopBar from "./Search/TopBar";
 import background from "../images/background.jpg";
-
+import { useMediaQuery } from "react-responsive";
 const Home = () => {
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const navigate = useNavigate();
   const addToListPage = () => {
     // 👇️ navigate to /
@@ -30,56 +34,110 @@ const Home = () => {
     height: 150,
     width: 150,
     margin: 20,
-
-    // CSS CODE
+  };
+  const tabletStyle = {
+    height: 120,
+    width: 120,
+    margin: 10,
   };
   return (
     <div style={backGroundStyle}>
       <TopBar></TopBar>
-      <div className="Home">
-        <div className="container">
-          <img
-            src={addtolist}
-            alt="Avatar"
-            class="image"
-            style={mystyle}
-            onClick={addToListPage}
-          ></img>
-          <div className="middle" onClick={addToListPage}>
-            <div className="text" onClick={addToListPage}>
-              Dodaj do bazy przedmiotów
+
+      {isDesktopOrLaptop && (
+        <div className="Home">
+          {" "}
+          <div className="container">
+            <img
+              src={addtolist}
+              alt="Avatar"
+              class="image"
+              style={mystyle}
+              onClick={addToListPage}
+            ></img>
+            <div className="middle" onClick={addToListPage}>
+              <div className="text" onClick={addToListPage}>
+                Dodaj do bazy przedmiotów
+              </div>
+            </div>
+          </div>
+          <div className="container">
+            <img
+              src={search}
+              alt="search"
+              class="image"
+              style={mystyle}
+              onClick={searchPage}
+            ></img>
+            <div className="middle" onClick={searchPage}>
+              <div className="text" onClick={searchPage}>
+                Wyszukaj przedmiot
+              </div>
+            </div>
+          </div>
+          <div className="container">
+            <img
+              src={barcode}
+              alt="Avatar"
+              class="image"
+              style={mystyle}
+              onClick={barCodePage}
+            ></img>
+            <div className="middle" onClick={barCodePage}>
+              <div className="text" onClick={barCodePage}>
+                Wyszukaj po kodzie QR
+              </div>
             </div>
           </div>
         </div>
-        <div className="container">
-          <img
-            src={search}
-            alt="search"
-            class="image"
-            style={mystyle}
-            onClick={searchPage}
-          ></img>
-          <div className="middle" onClick={searchPage}>
-            <div className="text" onClick={searchPage}>
-              Wyszukaj przedmiot
+      )}
+      {isTabletOrMobile && (
+        <div className="Home">
+          {" "}
+          <div className="container">
+            <img
+              src={addtolist}
+              alt="Avatar"
+              class="image"
+              style={tabletStyle}
+              onClick={addToListPage}
+            ></img>
+            <div className="middle" onClick={addToListPage}>
+              <div className="text" onClick={addToListPage}>
+                Dodaj do bazy przedmiotów
+              </div>
+            </div>
+          </div>
+          <div className="container">
+            <img
+              src={search}
+              alt="search"
+              class="image"
+              style={tabletStyle}
+              onClick={searchPage}
+            ></img>
+            <div className="middle" onClick={searchPage}>
+              <div className="text" onClick={searchPage}>
+                Wyszukaj przedmiot
+              </div>
+            </div>
+          </div>
+          <div className="container">
+            <img
+              src={barcode}
+              alt="Avatar"
+              class="image"
+              style={tabletStyle}
+              onClick={barCodePage}
+            ></img>
+            <div className="middle" onClick={barCodePage}>
+              <div className="text" onClick={barCodePage}>
+                Wyszukaj po kodzie QR
+              </div>
             </div>
           </div>
         </div>
-        <div className="container">
-          <img
-            src={barcode}
-            alt="Avatar"
-            class="image"
-            style={mystyle}
-            onClick={barCodePage}
-          ></img>
-          <div className="middle" onClick={barCodePage}>
-            <div className="text" onClick={barCodePage}>
-              Wyszukaj po kodzie QR
-            </div>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };
