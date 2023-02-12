@@ -3,6 +3,7 @@ import Card from "../UI/Card";
 import Movie from "./Movie";
 import classes from "./MoviesList.module.css";
 import ItemPropertiesBar from "../ItemsPropertiesBar";
+import BarCode from "../Barcode/BarCode";
 
 const ItemList = {
   margin: " auto",
@@ -17,6 +18,9 @@ const ItemList = {
 };
 
 const MovieList = (props) => {
+  const sprawdzenie = props.dataParentToChild3;
+  console.log(sprawdzenie);
+
   return (
     <div style={ItemList}>
       <ul className={classes["movies-list"]}>

@@ -52,7 +52,7 @@ const TopBar = () => {
           Wyszukiwanie przedmiotów
         </a>
         <a style={buttonStyleNavi} onClick={navigateBarCode}>
-          Wyszukiwanie po kodzie
+          Wyszukiwanie po kodzie QR
         </a>
       </div>
       <div>

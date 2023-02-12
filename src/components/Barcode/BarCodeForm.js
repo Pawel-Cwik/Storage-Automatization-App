@@ -1,12 +1,16 @@
-import { clear } from "@testing-library/user-event/dist/clear";
 import { useState } from "react";
 import "../Search/ActivateSearch.css";
 import MovieList from "../Search/MoviesList";
 import React from "react";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
+
 const BarCodeForm = (props) => {
   const [enteredCode, setEnteredCode] = useState("");
+  const [isId, setIsId] = useState("");
+  useEffect(() => {
+    setEnteredCode(props.dataParentToChild2);
+  }, [props.dataParentToChild2]);
 
   const codeChangeHandler = (event) => {
     setEnteredCode(event.target.value);
@@ -22,10 +26,13 @@ const BarCodeForm = (props) => {
     setEnteredCode("");
   };
 
+  const [data, setData] = useState("No result");
+
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   async function fetchItemsHandler() {
+    props.sendConfirmSearch();
     setIsLoading(true);
     setError(null);
     console.log("Test1");
@@ -102,22 +109,29 @@ const BarCodeForm = (props) => {
       <form onSubmit={submitHandler}>
         <div className="'search-form__controls">
           <div className="search-form__control">
-            <label>Wyszukaj po kodzie kreskowym lub ID przedmiotu</label>
-            <input
+            <label>Wyszukaj po kodzie QR</label>
+
+            <div style={{ padding: "2%" }}>
+              <label>Wprowadzony kod QR: {enteredCode} </label>
+            </div>
+            {/* <input
               type="text"
               value={enteredCode}
               onChange={codeChangeHandler}
-            ></input>
+            ></input> */}
           </div>
         </div>
 
         <div className="search-form__actions">
           <button
-            style={{ marginLeft: "65%" }}
+            style={{ marginLeft: "32%" }}
             type="button"
             onClick={fetchItemsHandler}
           >
-            Wyszukaj
+            Zatwierdź
+          </button>
+          <button type="button" onClick={props.activateQR}>
+            Wyszukaj po kodzie QR
           </button>
           <button type="button" onClick={props.onCancel}>
             Anuluj
