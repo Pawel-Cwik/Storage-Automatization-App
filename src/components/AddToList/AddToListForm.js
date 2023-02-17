@@ -4,7 +4,7 @@ import MoviesList from "../Search/MoviesList";
 import React from "react";
 import AddingAlert from "../SAlerts/AddingAlert";
 import AddingAlertConfirm from "../SAlerts/AddingAlertConfirm";
-
+const hex = require("string-hex");
 const AddToListForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredProducer, setEnteredProducer] = useState("NULL");
@@ -47,12 +47,30 @@ const AddToListForm = (props) => {
     setError(null);
 
     try {
+      const correctPolishLetters = (string) =>
+        string
+          .replace(/105/g, "c485")
+          .replace(/107/g, "c487")
+          .replace(/119/g, "c499")
+          .replace(/142/g, "c582")
+          .replace(/144/g, "c584")
+          .replace(/f3/g, "c3b3")
+          .replace(/15b/g, "c59b")
+          .replace(/17a/g, "c5ba")
+          .replace(/17c/g, "c5bc");
+
+      // ą 105. ć 107. ę 119. ł 142. ń 144. ó f3. ś 15b. ź 17a. ż 17c.
+      const conversionName = hex(enteredTitle);
+      const correctPolishLettersToHex = correctPolishLetters(conversionName);
+      const conversionAmount = hex(enteredAmount);
+      const correctPolishLettersAmountToHex =
+        correctPolishLetters(conversionAmount);
       const fillSpacesProducer = enteredProducer.replaceAll(" ", "_");
       const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
       const fillAmount = enteredAmount.replaceAll(" ", "_");
 
       const Response = await fetch(
-        `https://gestampmagazyn.pythonanywhere.com/test2/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}`
+        `https://gestampmagazyn.pythonanywhere.com/test2/${correctPolishLettersToHex}/${fillSpacesProducer}/${eneteredLoc}/${correctPolishLettersAmountToHex}`
       );
 
       if (!Response.ok) {
@@ -102,12 +120,30 @@ const AddToListForm = (props) => {
     console.log("DODAWANIE WARUNKOWE");
     setCondAdding(false);
     try {
+      const correctPolishLetters = (string) =>
+        string
+          .replace(/105/g, "c485")
+          .replace(/107/g, "c487")
+          .replace(/119/g, "c499")
+          .replace(/142/g, "c582")
+          .replace(/144/g, "c584")
+          .replace(/f3/g, "c3b3")
+          .replace(/15b/g, "c59b")
+          .replace(/17a/g, "c5ba")
+          .replace(/17c/g, "c5bc");
+
+      // ą 105. ć 107. ę 119. ł 142. ń 144. ó f3. ś 15b. ź 17a. ż 17c.
+      const conversionName = hex(enteredTitle);
+      const correctPolishLettersToHex = correctPolishLetters(conversionName);
+      const conversionAmount = hex(enteredAmount);
+      const correctPolishLettersAmountToHex =
+        correctPolishLetters(conversionAmount);
       const fillSpacesProducer = enteredProducer.replaceAll(" ", "_");
       const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
       const fillAmount = enteredAmount.replaceAll(" ", "_");
 
       const Response = await fetch(
-        `https://gestampmagazyn.pythonanywhere.com/add_item_cond/${fillSpacesTitle}/${fillSpacesProducer}/${eneteredLoc}/${fillAmount}/`
+        `https://gestampmagazyn.pythonanywhere.com/add_item_cond/${correctPolishLettersToHex}/${fillSpacesProducer}/${eneteredLoc}/${correctPolishLettersAmountToHex}/`
       );
 
       if (!Response.ok) {

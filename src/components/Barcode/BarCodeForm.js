@@ -7,7 +7,26 @@ import Swal from "sweetalert2";
 
 const BarCodeForm = (props) => {
   const [enteredCode, setEnteredCode] = useState("");
+  const [letConfirm, setLetConfirm] = useState(false);
   const [isId, setIsId] = useState("");
+  const [letConfirmButtonFromQrReader, setLetConfirmButtonFromQrReader] =
+    useState(false);
+  const letConfirmButton = () => {
+    console.log("letConfirmButton");
+  };
+  const callConfirmAndFetch = () => {
+    fetchItemsHandler();
+    setLetConfirmButtonFromQrReader(false);
+    // setEnteredCode("");
+    // unLetConfirmCode();
+  };
+  useEffect(() => {
+    setLetConfirmButtonFromQrReader(props.letConfirmButtonActivate);
+    console.log(props.letConfirmButtonActivate);
+    console.log("LAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    console.log(letConfirmButtonFromQrReader);
+  }, [props.letConfirmButtonActivate]);
+  console.log(letConfirmButtonFromQrReader);
   useEffect(() => {
     setEnteredCode(props.dataParentToChild2);
   }, [props.dataParentToChild2]);
@@ -25,6 +44,12 @@ const BarCodeForm = (props) => {
 
     setEnteredCode("");
   };
+  const letConfirmCode = () => {
+    setLetConfirm(true);
+  };
+  const unLetConfirmCode = () => {
+    setLetConfirm(false);
+  };
 
   const [data, setData] = useState("No result");
 
@@ -35,6 +60,7 @@ const BarCodeForm = (props) => {
     props.sendConfirmSearch();
     setIsLoading(true);
     setError(null);
+    props.deactivateConfirmButton();
     console.log("Test1");
     try {
       const Response = await fetch(
@@ -50,6 +76,7 @@ const BarCodeForm = (props) => {
       const data = await Response.json();
       console.log("DATA");
       console.log(data);
+
       if (data === "ID_ERROR") {
         return Swal.fire(
           "Brak wyników",
@@ -79,6 +106,7 @@ const BarCodeForm = (props) => {
       setError(error.message);
     }
   }
+
   useEffect(() => {
     const enterClickedHandler = (event) => {
       if (event.key === "Enter") {
@@ -111,8 +139,27 @@ const BarCodeForm = (props) => {
           <div className="search-form__control">
             <label>Wyszukaj po kodzie QR</label>
 
-            <div style={{ padding: "2%" }}>
-              <label>Wprowadzony kod QR: {enteredCode} </label>
+            <div
+              style={{
+                padding: "2%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              {/* <label>Wprowadzony kod QR: {enteredCode} </label> */}
+              <div style={{ fontWeight: "bold" }}>Wprowadzony kod QR:</div>
+              <div
+                style={{
+                  fontWeight: "bold",
+                  fontSize: "xx-large",
+                  width: "fit-content",
+                  borderRadius: "7px",
+                  marginTop: "1%",
+                }}
+              >
+                {enteredCode}
+              </div>
             </div>
             {/* <input
               type="text"
@@ -123,13 +170,34 @@ const BarCodeForm = (props) => {
         </div>
 
         <div className="search-form__actions">
-          <button
+          {/* <button
             style={{ marginLeft: "32%" }}
             type="button"
             onClick={fetchItemsHandler}
           >
             Zatwierdź
-          </button>
+          </button> */}
+          {!letConfirmButtonFromQrReader && (
+            <button
+              style={{
+                marginLeft: "32%",
+                backgroundColor: "rgb(222, 222,222)",
+                cursor: "not-allowed",
+                disabled: "true",
+              }}
+            >
+              Zatwierdź
+            </button>
+          )}
+          {letConfirmButtonFromQrReader && (
+            <button
+              style={{ marginLeft: "32%" }}
+              type="button"
+              onClick={callConfirmAndFetch}
+            >
+              Zatwierdź
+            </button>
+          )}
           <button type="button" onClick={props.activateQR}>
             Wyszukaj po kodzie QR
           </button>

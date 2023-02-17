@@ -9,7 +9,7 @@ const SearchForm = (props) => {
   const [enteredProducer, setEnteredProducer] = useState("NULL");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [eneteredLoc, setEnteredLoc] = useState("NULL");
-
+  const hex = require("string-hex");
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
 
@@ -85,11 +85,27 @@ const SearchForm = (props) => {
 
     if (enteredTitle.length > 0) {
       try {
+        const correctPolishLetters = (string) =>
+          string
+            .replace(/105/g, "c485")
+            .replace(/107/g, "c487")
+            .replace(/119/g, "c499")
+            .replace(/142/g, "c582")
+            .replace(/144/g, "c584")
+            .replace(/f3/g, "c3b3")
+            .replace(/15b/g, "c59b")
+            .replace(/17a/g, "c5ba")
+            .replace(/17c/g, "c5bc");
+
+        // ą 105. ć 107. ę 119. ł 142. ń 144. ó f3. ś 15b. ź 17a. ż 17c.
+        const conversion = hex(enteredTitle);
+        const correctPolishLettersToHex = correctPolishLetters(conversion);
+        console.log(correctPolishLetters(conversion));
         const fillSpacesProducer = enteredProducer.replaceAll(" ", "_");
         const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
 
         const Response = await fetch(
-          `https://gestampmagazyn.pythonanywhere.com/search_for/${fillSpacesTitle}/${eneteredLoc}/${fillSpacesProducer}/`
+          `https://gestampmagazyn.pythonanywhere.com/search_for/${correctPolishLettersToHex}/${eneteredLoc}/${fillSpacesProducer}/`
         );
 
         if (!Response.ok) {
@@ -138,6 +154,7 @@ const SearchForm = (props) => {
   async function fetchMoviesHandler() {
     Swal.showLoading();
     setError(null);
+
     console.log("Test1");
     try {
       const Response = await fetch(

@@ -43,6 +43,16 @@ function BarCode(props) {
   const [klik, setKlik] = React.useState("");
   const [id, setId] = React.useState("");
   const [show, setShow] = React.useState("");
+  const [letConfirmButtonFromQrReader, setLetConfirmButtonFromQrReader] =
+    React.useState(false);
+
+  const letConfirmButtonTrue = () => {
+    setLetConfirmButtonFromQrReader(true);
+  };
+  const letConfirmButtonFalse = () => {
+    setLetConfirmButtonFromQrReader(false);
+    console.log("letConfirmButtonFalse");
+  };
 
   const handleConfirmSearch = () => {
     setShow(true);
@@ -63,6 +73,7 @@ function BarCode(props) {
     setContent(data);
   };
   console.log(klik);
+
   let isContent = content.length > 0;
   const unHandleKlik = () => {
     setKlik(false);
@@ -76,13 +87,13 @@ function BarCode(props) {
 
   return (
     <div>
-      {isDesktopOrLaptop && (
+      {!isDesktopOrLaptop && (
         <div>
           <TopBar></TopBar>
           {wrongDevice()}
         </div>
       )}
-      {isTabletOrMobile && (
+      {!isTabletOrMobile && (
         <div>
           <div>
             <ActivateBarCodeSearch
@@ -90,6 +101,8 @@ function BarCode(props) {
               handleContent={handleContent}
               activateQR={handleKlik}
               handleConfirmSearch={handleConfirmSearch}
+              letConfirmButtonActivate={letConfirmButtonFromQrReader}
+              deactivateComfirmButtonInBarCode={letConfirmButtonFalse}
             ></ActivateBarCodeSearch>
             {show && (
               <MoviesList
@@ -109,7 +122,12 @@ function BarCode(props) {
               flexDirection: "column",
             }}
           >
-            {klik === true && <Test stopSearchingQR={handleKlik2}></Test>}
+            {klik === true && (
+              <Test
+                stopSearchingQR={handleKlik2}
+                letConfirmButton={letConfirmButtonTrue}
+              ></Test>
+            )}
           </div>
         </div>
       )}

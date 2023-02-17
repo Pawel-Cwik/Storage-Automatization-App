@@ -14,6 +14,14 @@ export default function ActivateBarCodeSearch(props) {
   const stopEditingHandler = () => {
     setIsEditing(false);
   };
+  const letConfirmButton2 = () => {
+    console.log("letConfirmButton");
+  };
+  //props.letConfirmButton(letConfirmButton2);
+  const deactivateConfirmButton = () => {
+    console.log("deactivateConfirmButton");
+    props.deactivateComfirmButtonInBarCode();
+  };
 
   useEffect(() => {
     setID(props.dataParentToChild);
@@ -35,6 +43,8 @@ export default function ActivateBarCodeSearch(props) {
           handleContent={props.handleContent}
           activateQR={props.activateQR}
           sendConfirmSearch={props.handleConfirmSearch}
+          letConfirmButtonActivate={props.letConfirmButtonActivate}
+          deactivateConfirmButton={deactivateConfirmButton}
         />
       )}
     </div>

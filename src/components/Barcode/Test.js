@@ -19,6 +19,7 @@ const Test = (props) => {
         if (!!result) {
           setData(result?.text);
           props.stopSearchingQR(result?.text);
+          props.letConfirmButton();
           let timerInterval;
           Swal.fire({
             timer: 1000,
@@ -36,14 +37,14 @@ const Test = (props) => {
           }).then((result) => {
             /* Read more about handling dismissals below */
             if (result.dismiss === Swal.DismissReason.timer) {
-              console.log("I was closed by the timer");
+              //console.log("I was closed by the timer");
             }
           });
           return;
         }
 
         if (!!error) {
-          console.info(error);
+          //console.info(error);
         }
       }}
       constraints={{ facingMode: "environment" }}

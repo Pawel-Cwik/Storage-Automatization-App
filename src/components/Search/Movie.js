@@ -90,6 +90,7 @@ const Movie = (props) => {
   const [statusLoc, setStatusLoc] = useState(props.lokalizacja);
   const [statusAmount, setStatusAmount] = useState(props.releaseDate);
   const [statusLocChange, setStatusLocChange] = useState(props.lokalizacja);
+  const hex = require("string-hex");
   const [statusAmountChange, setStatusAmountChange] = useState(
     props.releaseDate
   );
@@ -113,8 +114,24 @@ const Movie = (props) => {
     setStatusAmount(statusAmountChange);
     setStatusLoc(statusLocChange);
     const fillAmount = statusAmountChange.replaceAll(" ", "_");
+    const correctPolishLetters = (string) =>
+      string
+        .replace(/105/g, "c485")
+        .replace(/107/g, "c487")
+        .replace(/119/g, "c499")
+        .replace(/142/g, "c582")
+        .replace(/144/g, "c584")
+        .replace(/f3/g, "c3b3")
+        .replace(/15b/g, "c59b")
+        .replace(/17a/g, "c5ba")
+        .replace(/17c/g, "c5bc");
+
+    // ą 105. ć 107. ę 119. ł 142. ń 144. ó f3. ś 15b. ź 17a. ż 17c.
+    const conversionAmount = hex(statusAmountChange);
+    const correctPolishLettersAmountToHex =
+      correctPolishLetters(conversionAmount);
     const Response = await fetch(
-      `https://gestampmagazyn.pythonanywhere.com/test_edit/${props.id_przedmiotu}/${statusLocChange}/${fillAmount}/`
+      `https://gestampmagazyn.pythonanywhere.com/test_edit/${props.id_przedmiotu}/${statusLocChange}/${correctPolishLettersAmountToHex}/`
     );
     console.log(`${statusLocChange}, ${statusAmountChange} LALALALALLALAL`);
     if (!Response.ok) {
