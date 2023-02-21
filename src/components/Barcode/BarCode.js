@@ -6,6 +6,7 @@ import Test from "./Test";
 import { useMediaQuery } from "react-responsive";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+
 function BarCode(props) {
   const navigate = useNavigate();
 
@@ -36,9 +37,9 @@ function BarCode(props) {
       });
   }
   const isDesktopOrLaptop = useMediaQuery({
-    query: "(min-width: 1224px)",
+    query: "(min-width: 1281px)",
   });
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1281px)  " });
   const [content, setContent] = React.useState([]);
   const [klik, setKlik] = React.useState("");
   const [id, setId] = React.useState("");
@@ -87,13 +88,9 @@ function BarCode(props) {
 
   return (
     <div>
-      {!isDesktopOrLaptop && (
-        <div>
-          <TopBar></TopBar>
-          {wrongDevice()}
-        </div>
-      )}
-      {!isTabletOrMobile && (
+      <TopBar></TopBar>
+      {isDesktopOrLaptop && <div>{wrongDevice()}</div>}
+      {isTabletOrMobile && (
         <div>
           <div>
             <ActivateBarCodeSearch

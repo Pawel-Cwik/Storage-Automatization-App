@@ -9,8 +9,10 @@ const BarCodeForm = (props) => {
   const [enteredCode, setEnteredCode] = useState("");
   const [letConfirm, setLetConfirm] = useState(false);
   const [isId, setIsId] = useState("");
-  const [letConfirmButtonFromQrReader, setLetConfirmButtonFromQrReader] =
-    useState(false);
+  const [
+    letConfirmButtonFromQrReader,
+    setLetConfirmButtonFromQrReader,
+  ] = useState(false);
   const letConfirmButton = () => {
     console.log("letConfirmButton");
   };

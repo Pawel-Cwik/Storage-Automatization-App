@@ -3,6 +3,7 @@ import "./Login.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import GestampLogo from "../images/Gestamp-Logo.png";
 import background from "../images/background.jpg";
+import Swal from "sweetalert2";
 const backGroundStyle = {
   backgroundImage: `url(${background})`,
   backgroundSize: "cover",
@@ -34,7 +35,12 @@ const Login = (props) => {
       console.log(data);
       if (data === "LOGGED") {
         navigateHome();
-      }
+      } else
+        return Swal.fire(
+          "Błędny login lub hasło",
+          `Wprowadzony login lub hasło jest błędne, spróbuj ponownie.`,
+          "error"
+        );
     } catch (error) {
       console.log("TEST3 WIADOMOSC NIE DOTARLA");
       console.log(error);
