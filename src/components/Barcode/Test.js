@@ -8,10 +8,6 @@ const Test = (props) => {
   const startSearchingQR = () => {
     setIsSearchingQR(true);
   };
-  let timerInterval;
-  // const stopSearchingQR = () => {
-  //   setIsSearchingQR(false);
-  // };
 
   return (
     <QrReader
@@ -35,9 +31,7 @@ const Test = (props) => {
               clearInterval(timerInterval);
             },
           }).then((result) => {
-            /* Read more about handling dismissals below */
             if (result.dismiss === Swal.DismissReason.timer) {
-              //console.log("I was closed by the timer");
             }
           });
           return;
@@ -48,7 +42,6 @@ const Test = (props) => {
         }
       }}
       constraints={{ facingMode: "environment" }}
-      // videoContainerStyle={{ width: "50%", height: "50%" }}
       containerStyle={{ width: "50%", height: "50%" }}
       videoStyle={{
         borderRadius: "50px",

@@ -1,7 +1,7 @@
 import React from "react";
-import Card from "../UI/Card";
-import Movie from "./Movie";
-import classes from "./MoviesList.module.css";
+
+import Items from "./Items";
+import classes from "./ItemsList.module.css";
 import ItemPropertiesBar from "../ItemsPropertiesBar";
 import BarCode from "../Barcode/BarCode";
 
@@ -17,16 +17,15 @@ const ItemList = {
   overflowX: "hidden",
 };
 
-const MovieList = (props) => {
+const ItemsList = (props) => {
   const sprawdzenie = props.dataParentToChild3;
-  console.log(sprawdzenie);
 
   return (
     <div style={ItemList}>
       <ul className={classes["movies-list"]}>
         <ItemPropertiesBar></ItemPropertiesBar>
         {props.movies.map((movie) => (
-          <Movie
+          <Items
             key={movie.id_przedmiotu}
             id_przedmiotu={movie.id_przedmiotu}
             title={movie.nazwa}
@@ -40,12 +39,4 @@ const MovieList = (props) => {
   );
 };
 
-export default MovieList;
-// {
-//   statusEditLoc && (
-//     <input
-//       value={props.statusLoc}
-//       onChange={(e) => setStatusLoc(e.target.value)}
-//     ></input>
-//   );
-// }
+export default ItemsList;

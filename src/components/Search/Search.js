@@ -2,7 +2,7 @@ import TopBar from "./TopBar";
 import React from "react";
 import ActivateSearch from "./ActivateSearch";
 import "./Search.css";
-import MoviesList from "./MoviesList";
+import MoviesList from "./ItemsList";
 
 function Search(props) {
   const [content, setContent] = React.useState([]);

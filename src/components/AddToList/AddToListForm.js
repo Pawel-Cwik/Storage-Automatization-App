@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "../Search/ActivateSearch.css";
-import MoviesList from "../Search/MoviesList";
 import React from "react";
 import AddingAlert from "../SAlerts/AddingAlert";
 import AddingAlertConfirm from "../SAlerts/AddingAlertConfirm";
@@ -17,9 +16,6 @@ const AddToListForm = (props) => {
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
-
-    //console.log(enteredTitle);
-    // console.log(enteredTitle.replaceAll(" ", "_"));
   };
   const amountChangeHandler = (event) => {
     setEnteredAmount(event.target.value);
@@ -66,22 +62,16 @@ const AddToListForm = (props) => {
       const correctPolishLettersAmountToHex =
         correctPolishLetters(conversionAmount);
       const fillSpacesProducer = enteredProducer.replaceAll(" ", "_");
-      const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
-      const fillAmount = enteredAmount.replaceAll(" ", "_");
 
       const Response = await fetch(
         `https://gestampmagazyn.pythonanywhere.com/test2/${correctPolishLettersToHex}/${fillSpacesProducer}/${eneteredLoc}/${correctPolishLettersAmountToHex}`
       );
 
       if (!Response.ok) {
-        console.log("TEST2 WIADOMOSC NIE DOTARLA");
-
         throw new Error("Something went wrong!");
       }
-      console.log("TEST2 WIADOMOSC DOTARLA");
+
       const data = await Response.json();
-      console.log(data);
-      console.log("DATA |");
       const transformedMovies = data.map((movieData) => {
         return {
           id_przedmiotu: movieData[0].id_przedmiotu,
@@ -98,14 +88,9 @@ const AddToListForm = (props) => {
       if (data[0] === "NEW") {
         AddingAlertConfirm(transformedMovies[1]);
       }
-      console.log("TEST2");
-      console.log(transformedMovies);
-      console.log([transformedMovies[1]]);
-      console.log(transformedMovies[0]);
       setMovies(transformedMovies[0]);
       setIsLoading(false);
       props.handleContent(transformedMovies.slice(1));
-      console.log(transformedMovies.slice(1));
     } catch (error) {
       setError(error.message);
     }
@@ -117,7 +102,6 @@ const AddToListForm = (props) => {
   async function addToListCondHandler() {
     setIsLoading(true);
     setError(null);
-    console.log("DODAWANIE WARUNKOWE");
     setCondAdding(false);
     try {
       const correctPolishLetters = (string) =>
@@ -132,28 +116,22 @@ const AddToListForm = (props) => {
           .replace(/17a/g, "c5ba")
           .replace(/17c/g, "c5bc");
 
-      // ą 105. ć 107. ę 119. ł 142. ń 144. ó f3. ś 15b. ź 17a. ż 17c.
       const conversionName = hex(enteredTitle);
       const correctPolishLettersToHex = correctPolishLetters(conversionName);
       const conversionAmount = hex(enteredAmount);
       const correctPolishLettersAmountToHex =
         correctPolishLetters(conversionAmount);
       const fillSpacesProducer = enteredProducer.replaceAll(" ", "_");
-      const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
-      const fillAmount = enteredAmount.replaceAll(" ", "_");
 
       const Response = await fetch(
         `https://gestampmagazyn.pythonanywhere.com/add_item_cond/${correctPolishLettersToHex}/${fillSpacesProducer}/${eneteredLoc}/${correctPolishLettersAmountToHex}/`
       );
 
       if (!Response.ok) {
-        console.log("TEST2 WIADOMOSC NIE DOTARLA");
-
         throw new Error("Something went wrong!");
       }
-      console.log("TEST2 WIADOMOSC DOTARLA");
+
       const data = await Response.json();
-      console.log(data);
 
       const transformedMovies = data.map((movieData) => {
         return {
@@ -164,8 +142,7 @@ const AddToListForm = (props) => {
           lokalizacja: data[1][1].Nazwa_przestrzeni_skladowania,
         };
       });
-      console.log(data[1][0]);
-      console.log(data[0]);
+
       if (data[0] === "DB") {
         AddingAlert(transformedMovies[1], handleConfirm);
       }
@@ -173,10 +150,7 @@ const AddToListForm = (props) => {
       setMovies(transformedMovies[0]);
       setIsLoading(false);
       props.handleContent([transformedMovies[1]]);
-      console.log("TEST2");
-      console.log(transformedMovies);
-      console.log([transformedMovies[1]]);
-      console.log(transformedMovies[0]);
+
       setMovies(transformedMovies[0]);
     } catch (error) {
       setError(error.message);
@@ -187,8 +161,6 @@ const AddToListForm = (props) => {
   useEffect(() => {
     const enterClickedHandler = (event) => {
       if (event.key === "Enter") {
-        console.log("ENTER");
-
         addToListHandler();
       }
     };
@@ -197,17 +169,6 @@ const AddToListForm = (props) => {
       document.removeEventListener("keydown", enterClickedHandler);
     };
   }, [eneteredLoc, enteredProducer, enteredTitle, enteredAmount]);
-  // O TUTAJ JESTEM W STANIE MIEĆ TRUE
-  let content = <p>Found no movies.</p>;
-  if (movies.length > 0) {
-    content = <MoviesList movies={movies}></MoviesList>;
-  }
-  if (error) {
-    content = <p>{error}</p>;
-  }
-  if (isLoading) {
-    content = <p>Loading...</p>;
-  }
 
   return (
     <div>
@@ -380,9 +341,6 @@ const AddToListForm = (props) => {
           <button type="button" onClick={props.onCancel}>
             Anuluj
           </button>
-          {/* <button type="button" onClick={fetchByNameProducerLocationHandler}>
-            Accept
-          </button> */}
         </div>
       </form>
     </div>

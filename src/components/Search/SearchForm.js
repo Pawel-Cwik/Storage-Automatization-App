@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./SearchForm.css";
-import MoviesList from "./MoviesList";
+
 import React from "react";
 import Swal from "sweetalert2";
 
@@ -12,9 +12,6 @@ const SearchForm = (props) => {
   const hex = require("string-hex");
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
-
-    //console.log(enteredTitle);
-    // console.log(enteredTitle.replaceAll(" ", "_"));
   };
 
   const submitHandler = (event) => {
@@ -47,13 +44,11 @@ const SearchForm = (props) => {
         );
 
         if (!Response.ok) {
-          console.log("TEST2 WIADOMOSC NIE DOTARLA");
-
           throw new Error("Something went wrong!");
         }
-        console.log("TEST2 WIADOMOSC DOTARLAA");
+
         const data = await Response.json();
-        console.log(data);
+
         if (data === "BRAK") {
           return Swal.fire(
             "Brak wyników",
@@ -78,9 +73,6 @@ const SearchForm = (props) => {
         setError(error.message);
       }
       Swal.hideLoading(Swal.close());
-
-      // jeżeli tak, to fetch na null/${producer}/${location}
-      // Jeżeli ni to fetch na ${title}/${producer}/${location}
     }
 
     if (enteredTitle.length > 0) {
@@ -100,7 +92,6 @@ const SearchForm = (props) => {
         // ą 105. ć 107. ę 119. ł 142. ń 144. ó f3. ś 15b. ź 17a. ż 17c.
         const conversion = hex(enteredTitle);
         const correctPolishLettersToHex = correctPolishLetters(conversion);
-        console.log(correctPolishLetters(conversion));
         const fillSpacesProducer = enteredProducer.replaceAll(" ", "_");
         const fillSpacesTitle = enteredTitle.replaceAll(" ", "_");
 
@@ -140,35 +131,22 @@ const SearchForm = (props) => {
         setError(error.message);
       }
       Swal.hideLoading(Swal.close());
-
-      // jeżeli tak, to fetch na null/${producer}/${location}
-      // Jeżeli ni to fetch na ${title}/${producer}/${location}
     }
-
-    console.log("Test1");
-    console.log(enteredTitle);
-    console.log(enteredTitle.length);
-    console.log(enteredProducer);
-    console.log(eneteredLoc);
   }
   async function fetchMoviesHandler() {
     Swal.showLoading();
     setError(null);
 
-    console.log("Test1");
     try {
       const Response = await fetch(
         "https://gestampmagazyn.pythonanywhere.com/download_all_items/"
       );
 
       if (!Response.ok) {
-        console.log("TEST2 WIADOMOSC NIE DOTARLA");
-
         throw new Error("Something went wrong!");
       }
-      console.log("TEST2 WIADOMOSC DOTARLA");
+
       const data = await Response.json();
-      console.log(data);
 
       const transformedMovies = data.map((movieData) => {
         return {
@@ -190,10 +168,6 @@ const SearchForm = (props) => {
   useEffect(() => {
     const enterClickedHandler = (event) => {
       if (event.key === "Enter") {
-        console.log("ENTER");
-        console.log(eneteredLoc);
-        console.log(enteredProducer);
-        console.log(enteredTitle);
         fetchByNameProducerLocationHandler();
       }
     };
@@ -202,17 +176,6 @@ const SearchForm = (props) => {
       document.removeEventListener("keydown", enterClickedHandler);
     };
   }, [eneteredLoc, enteredProducer, enteredTitle]);
-
-  let content = <p>Found no movies.</p>;
-  if (movies.length > 0) {
-    content = <MoviesList movies={movies}></MoviesList>;
-  }
-  if (error) {
-    content = <p>{error}</p>;
-  }
-  if (isLoading) {
-    content = <p>Loading...</p>;
-  }
 
   return (
     <div>

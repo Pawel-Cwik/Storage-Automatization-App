@@ -1,7 +1,7 @@
 import "./TopBar.css";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { colors } from "@material-ui/core";
+
 
 const TopBar = () => {
   const navigate = useNavigate();
@@ -27,18 +27,15 @@ const TopBar = () => {
     navigate("/BarCode");
   };
   const buttonStyleNavi = {
-    // outline: "black solid 1px",
-    // borderRadius: "10px",
+
     borderRight: "2px solid black",
     borderRadius: "40px",
   };
   const buttonStyle = {
-    // outline: "black solid 1px",
-    // borderRadius: "10px",
+
     borderLeft: "2px solid black",
     borderRadius: "40px",
   };
-  // div w którym będzie 4 przyciski pierwsze i to będzie flex row i do lewej i piąty będzie osobno allgin right
   return (
     <section className="TopBar">
       <div>

@@ -6,5 +6,5 @@
   color: white;
   background-color: white;
   padding: 1rem;
-  box-shadow: -5px 5px 0px black; /* x-offset | y-offset | blur to 0 | color */
+  box-shadow: -5px 5px 0px black;
 }

@@ -26,13 +26,13 @@ const Login = (props) => {
       );
 
       if (!Response.ok) {
-        console.log("TEST2 WIADOMOSC NIE DOTARLA");
+        console.log("WIADOMOSC NIE DOTARLA");
 
         throw new Error("Something went wrong!");
       }
-      console.log("TEST2 WIADOMOSC DOTARLAA");
+      console.log("WIADOMOSC DOTARLAA");
       const data = await Response.json();
-      console.log(data);
+
       if (data === "LOGGED") {
         navigateHome();
       } else
@@ -42,15 +42,12 @@ const Login = (props) => {
           "error"
         );
     } catch (error) {
-      console.log("TEST3 WIADOMOSC NIE DOTARLA");
       console.log(error);
     }
   }
   useEffect(() => {
     const enterLoginHandler = (event) => {
       if (event.key === "Enter") {
-        console.log("ENTER");
-
         checkLogin();
       }
     };
@@ -93,7 +90,6 @@ const Login = (props) => {
             id="password"
             name="password"
           ></input>
-          {/* <button type="submit">Log In</button> */}
           <button-login-register
             style={{
               display: "center",

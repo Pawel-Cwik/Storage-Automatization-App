@@ -1,20 +1,20 @@
-/* create a new class called "TopBar" */
+
 .TopBar {
-  /* set the background color to #f5f5f5 */
+
   background-color: white;
-  /* set the height to 50px */
+
   height: 55px;
-  /* set the width to 100% */
+
   width: auto;
-  /* set the display to flex */
+
   display: flex;
-  /* set the flex-direction to row */
+
   flex-direction: row;
-  /* set the justify-content to space-between */
+
   justify-content: space-between;
-  /* set the align-items to center */
+
   align-items: center;
-  /* set the padding to 0 20px */
+
   padding: auto;
 }
 .TopBar button {

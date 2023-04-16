@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "../UI/Card";
-import "./Movie.module.css";
+
+import "./Items.module.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { Button } from "@material-ui/core";
@@ -84,7 +84,7 @@ const amountStyle = {
   minWidth: "20%",
 };
 
-const Movie = (props) => {
+const Items = (props) => {
   const [statusEditLoc, setStatusEditLoc] = useState(false);
   const [statusEditAmount, setStatusEditAmount] = useState(false);
   const [statusLoc, setStatusLoc] = useState(props.lokalizacja);
@@ -97,7 +97,6 @@ const Movie = (props) => {
   const [isEditing, setIsEditing] = useState(false);
   const startEditingHandler = () => {
     setIsEditing(true);
-    console.log(props.id_przedmiotu);
   };
   const stopEditingHandler = () => {
     setIsEditing(false);
@@ -106,9 +105,6 @@ const Movie = (props) => {
     setStatusAmount(statusAmount);
   };
   async function sendSaveData() {
-    console.log("TEST1 WIADOMOSC DOTARLA");
-    console.log(statusLoc);
-    console.log(statusAmount);
     setIsEditing(false);
     setStatusEditLoc(false);
     setStatusAmount(statusAmountChange);
@@ -150,9 +146,6 @@ const Movie = (props) => {
       `Przedmiot ${props.title} został edytowany`,
       "success"
     );
-
-    console.log("TEST2 WIADOMOSC DOTARLA");
-    console.log(`${statusLoc}, ${statusAmount}`);
   }
 
   return (
@@ -305,4 +298,4 @@ const Movie = (props) => {
   );
 };
 
-export default Movie;
+export default Items;

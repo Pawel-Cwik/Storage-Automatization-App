@@ -12,8 +12,7 @@ const AddingAlert = (props, handleConfirm) => {
   swalWithBootstrapButtons
     .fire({
       title: "Na pewno chcesz dodać ten przedmiot?",
-      text:
-        "Taki przedmiot istnieje już w bazie danych, czy mimo to chcesz go dodać?",
+      text: "Taki przedmiot istnieje już w bazie danych, czy mimo to chcesz go dodać?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -30,10 +29,7 @@ const AddingAlert = (props, handleConfirm) => {
           "success"
         );
         handleConfirm(true);
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
         swalWithBootstrapButtons.fire(
           "Anulowano",
           "Przedmiot nie został dodany do bazy danych.",

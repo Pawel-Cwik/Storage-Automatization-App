@@ -1,7 +1,7 @@
 import React from "react";
 import TopBar from "../Search/TopBar";
 import AcivateAddToList from "./ActivateAddToList";
-import MoviesList from "../Search/MoviesList";
+import MoviesList from "../Search/ItemsList";
 import "../Search/ActivateSearch.css";
 import "../Search/Search.css";
 

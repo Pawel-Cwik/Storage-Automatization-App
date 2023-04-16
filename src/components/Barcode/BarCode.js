@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import TopBar from "../Search/TopBar";
 import ActivateBarCodeSearch from "./ActivateBarCodeSearch";
-import MoviesList from "../Search/MoviesList";
+import MoviesList from "../Search/ItemsList";
 import Test from "./Test";
 import { useMediaQuery } from "react-responsive";
 import Swal from "sweetalert2";
@@ -23,11 +23,8 @@ function BarCode(props) {
         title: "Niepoprawny typ urządzenia.",
         text: "Ta strona jest dostępna tylko na urządzeniach mobilnych.",
         icon: "warning",
-
         confirmButtonColor: "#3085d6",
-
         confirmButtonText: "Wróć do strony głównej.",
-
         reverseButtons: true,
       })
       .then((result) => {
@@ -52,7 +49,6 @@ function BarCode(props) {
   };
   const letConfirmButtonFalse = () => {
     setLetConfirmButtonFromQrReader(false);
-    console.log("letConfirmButtonFalse");
   };
 
   const handleConfirmSearch = () => {
@@ -67,8 +63,6 @@ function BarCode(props) {
     setId(data);
 
     isContent = false;
-
-    // props.handleID(data);
   };
   const handleContent = (data) => {
     setContent(data);
@@ -108,9 +102,6 @@ function BarCode(props) {
               ></MoviesList>
             )}
             {}
-            {/* {!show && isContent && (
-          <MoviesList movies={content} dataParentToChild3={klik}></MoviesList>
-        )} */}
           </div>
           <div
             style={{
